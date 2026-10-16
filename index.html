@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light" />
+<title>초미녀현진쌤의 수업앱 프롬프트 제조기 | 첨부 파일 미리보기</title>
+<style>
+:root{--ink:#232540;--muted:#69708a;--line:#e8e8f2;--soft:#faf9ff;--pink:#f44791;--violet:#7356d7;--blue:#3975e8;--green:#25a67d;--yellow:#fff0ad;--shadow:0 20px 55px rgba(56,38,108,.085)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:#f7f7fc;font-family:ui-sans-serif,system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;line-height:1.55}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.52;cursor:not-allowed}a{color:inherit}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid rgba(98,94,245,.35);outline-offset:2px}
+.topbar{height:66px;background:#fff;border-bottom:1px solid var(--line)}.topinner{max-width:1320px;margin:auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:10px;align-items:center;font-weight:900;letter-spacing:-.7px}.brandmark{background:#f4e8ff;border:2px solid #e6d5ff;width:34px;height:34px;display:grid;place-items:center;border-radius:12px}.topbadge{font-size:12px;font-weight:800;border:1px solid #e0dced;border-radius:99px;color:#796caa;padding:6px 11px}.hero{max-width:1320px;margin:28px auto 24px;padding:0 24px}.heroInner{overflow:hidden;border-radius:30px;min-height:220px;background:linear-gradient(110deg,#fff4fb 0%,#f5f2ff 52%,#eef9ff 100%);border:1px solid #e9e4f5;display:flex;justify-content:space-between;position:relative;box-shadow:var(--shadow)}.heroText{padding:35px 40px;position:relative;z-index:1}.eyebrow{text-transform:uppercase;color:#9c4fab;font-weight:900;font-size:12px;letter-spacing:2px}.hero h1{font-size:clamp(25px,2.9vw,39px);letter-spacing:-1.7px;line-height:1.27;margin:9px 0 11px}.hero h1 em{font-style:normal;color:#ec438d}.hero p{font-size:15px;color:#62637c;margin:0 0 18px}.pills{display:flex;gap:8px;flex-wrap:wrap}.pill{font-weight:800;font-size:12px;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid #eae1ee;color:#72527f}.heroArt{position:relative;min-width:270px}.orb{position:absolute;width:252px;height:252px;right:38px;top:-13px;border-radius:43% 57% 55% 45%;background:linear-gradient(135deg,#ffe4e7,#e5dcff);transform:rotate(-20deg)}.robot{position:absolute;right:92px;top:32px;font-size:118px;filter:drop-shadow(0 14px 8px #b8a8d76e);transform:rotate(10deg)}.sticker{position:absolute;background:white;border:2px solid #e3d7f4;padding:9px 13px;border-radius:15px;box-shadow:0 6px 13px rgba(90,65,137,.1);font-weight:800;font-size:13px;right:16px;bottom:28px;transform:rotate(-7deg)}
+.work{max-width:1320px;padding:0 24px 50px;margin:auto;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(410px,.98fr);gap:20px;align-items:start}.panel{background:white;border:1px solid #eae8f1;border-radius:24px;box-shadow:0 5px 20px rgba(40,36,85,.035);overflow:hidden}.panelHead{padding:22px 25px 16px;border-bottom:1px solid #f0eff5;display:flex;gap:12px;align-items:center}.stepnum{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:12px;background:#fdecf4;color:#e63b83;font-size:15px;font-weight:900}.panelHead h2{font-size:19px;letter-spacing:-.75px;margin:0}.panelHead small{display:block;color:var(--muted);font-size:12px}.pad{padding:22px 25px}.sectiontitle{font-size:14px;font-weight:900;margin:0 0 10px;display:flex;align-items:center;justify-content:space-between;gap:8px}.softtitle{font-size:12px;color:var(--muted);font-weight:600}.genresTop{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.filter{background:#f6f5f9;border:1px solid transparent;border-radius:10px;padding:7px 12px;font-size:12px;font-weight:800;color:#79758c}.filter.active{background:#eee6ff;border-color:#d5c8ff;color:#583eae}.genres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.genre{display:flex;min-height:80px;align-items:center;gap:9px;text-align:left;padding:10px 11px;border:1.5px solid var(--line);background:white;border-radius:13px;transition:.16s}.genre:hover{border-color:#c6b2fa;transform:translateY(-1px)}.genre.active{border-color:#8165e7;background:#f6f2ff;box-shadow:inset 0 0 0 .5px #8165e7}.genreEmoji{font-size:23px;flex:none}.genreName{font-size:13px;font-weight:900;display:block;line-height:1.35}.genreDesc{font-size:10.5px;color:#8b8a9e;display:block;margin-top:3px;line-height:1.4}.tip{background:#fbf9ff;border:1px solid #ede6ff;border-radius:14px;color:#5d597a;padding:10px 12px;font-size:12px;display:flex;gap:8px;margin-top:14px}.tip b{color:#7650c8}
+hr{border:0;border-top:1px dashed #e5e3ee;margin:20px 0}.rowfields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin-bottom:15px}.field label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:900;margin-bottom:7px}.field label span{font-size:11px;color:#a4a0b1;font-weight:600}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1.3px solid #e0dfeb;border-radius:11px;background:#fff;color:var(--ink);outline:0;font-size:13px;transition:border-color .15s,box-shadow .15s}.field input:focus,.field textarea:focus,.field select:focus{border-color:#8b72e7;box-shadow:0 0 0 3px #eee9ff}.field textarea{min-height:115px;resize:vertical}.field textarea.smaller{min-height:75px}.presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:17px}.preset{background:#fff;border:1px solid #e1d9f6;border-radius:99px;padding:7px 10px;color:#7852bc;font-size:11px;font-weight:800}.preset:hover{background:#f6f0ff}.choiceRow{display:flex;gap:8px;flex-wrap:wrap}.choice{border:1px solid #e4e3ef;padding:8px 12px;border-radius:12px;background:white;color:#6e6c85;font-size:12px;font-weight:800}.choice.active{color:#634bc0;background:#f4f0ff;border-color:#917fe1}.checks{display:flex;gap:8px;flex-wrap:wrap}.check{display:flex;align-items:center;gap:6px;border:1px solid #eeedf3;border-radius:10px;padding:7px 9px;font-size:12px;color:#62677f;cursor:pointer}.check input{accent-color:#7559df;width:15px;height:15px;margin:0}.advanced summary{list-style:none;cursor:pointer;font-size:13px;font-weight:900}.advanced summary::-webkit-details-marker{display:none}.advanced{border:1px solid #e9e6f2;border-radius:13px;padding:13px 14px;background:#fdfcff}.advanced[open] summary{margin-bottom:15px}.hintsmall{color:#8c859b;font-size:11px;margin-top:6px}.savebox{display:flex;gap:8px;flex-wrap:wrap;padding-top:16px}.subbutton{border:1px solid #e3dfee;background:white;border-radius:12px;padding:9px 12px;color:#655f80;font-weight:800;font-size:12px}.subbutton:hover{background:#f8f6ff}
+.rightCol{position:sticky;top:20px}.resultHead{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:21px 24px 16px;border-bottom:1px solid #f0eff5}.resultHead h2{margin:0;font-size:18px;letter-spacing:-.6px}.resultHead p{font-size:11px;color:var(--muted);margin:3px 0 0}.mode{display:flex;gap:4px;background:#f5f3fa;border-radius:11px;padding:4px;margin:18px 21px 0}.mode button{border:0;background:transparent;flex:1;padding:10px 5px;border-radius:8px;color:#8b869d;font-size:12px;font-weight:900}.mode button.active{background:#fff;box-shadow:0 2px 9px #e8e3f0;color:#51469a}.resultPad{padding:17px 21px 21px}.state{display:flex;align-items:center;gap:8px;font-size:12px;color:#8781a4;margin-bottom:9px}.dot{background:#36bd8e;width:7px;height:7px;border-radius:50%}.promptBox{border:1px solid #e1ddec;border-radius:14px;overflow:auto;min-height:260px;max-height:520px;background:#fcfbff;padding:18px 16px;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:12.7px/1.8 ui-monospace,SFMono-Regular,Consolas,'Malgun Gothic',monospace;color:#34374a;tab-size:2}.action{display:flex;gap:9px;margin-top:13px}.primary{border:0;background:linear-gradient(100deg,#8a5ef0,#ec5ca5);color:#fff;border-radius:13px;padding:13px 15px;flex:1;font-size:14px;font-weight:900;box-shadow:0 8px 16px rgba(183,86,184,.15)}.primary:hover{filter:brightness(.98)}.outline{background:white;border:1px solid #ded8ed;border-radius:13px;padding:11px 14px;font-weight:800;font-size:13px;color:#655781}.linkrow{display:flex;gap:8px;margin-top:13px;align-items:center;flex-wrap:wrap}.linkrow a{text-decoration:none;border-radius:9px;font-size:12px;font-weight:800;padding:7px 10px;background:#f5f3ff;color:#6555a2}.linkrow a:hover{background:#eae5fb}.under{font-size:11px;color:#918ba4;margin-top:13px}.tinyRule{font-size:12px;color:#6a607b;padding:12px 13px;border-radius:12px;background:#fff8e9;margin-top:15px;border:1px solid #faebc6}.footer{max-width:1320px;margin:-25px auto 40px;padding:0 24px;font-size:12px;color:#8f90a3}.error{color:#d82d67!important}.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);background:#312d4a;color:white;border-radius:99px;padding:12px 18px;font-size:13px;font-weight:800;z-index:100;box-shadow:0 10px 35px rgba(35,30,56,.2);opacity:0;transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1090px){.work{grid-template-columns:1fr}.rightCol{position:static}.genres{grid-template-columns:repeat(4,minmax(0,1fr))}.heroArt{min-width:230px}.robot{right:75px}}
+@media(max-width:680px){.topinner,.hero,.work,.footer{padding-left:14px;padding-right:14px}.heroInner{min-height:auto;border-radius:20px}.heroText{padding:25px 20px}.hero h1{font-size:27px}.hero p{max-width:340px}.heroArt{display:none}.panel{border-radius:19px}.panelHead,.pad{padding-left:16px;padding-right:16px}.genres{grid-template-columns:repeat(2,minmax(0,1fr))}.rowfields{grid-template-columns:1fr}.topbadge{font-size:10px}.linkrow a{font-size:11px}}
+@media print{.topbar,.heroArt,.action,.linkrow,.filters,.footer,.toast{display:none}.work{display:block}.leftCol{display:none}.resultPad{padding:0}.promptBox{max-height:none;border:0;overflow:visible}.rightCol{position:static}}
+
+/* 교과서 파일 인식: 의도적으로 기존 제조기 구조와 어울리게 디자인 */
+.uploadPanel{border:1.5px solid #dcd1fa;border-radius:17px;background:linear-gradient(125deg,#fbf7ff,#f2f9ff);padding:15px;margin-bottom:17px}
+.uploadHeader{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.uploadHeader strong{font-size:14px}.uploadHeader small{display:block;color:#77728a;font-size:11px;margin-top:3px;line-height:1.6}
+.uploadDrop{border:2px dashed #beb1e5;background:white;border-radius:15px;padding:8px;transition:border-color .15s,background .15s;min-width:0}
+.uploadDrop:hover,.uploadDrop.drag{border-color:#705ae6;background:#fcfaff}
+.uploadDrop.hasFiles{border-color:#9b85ea;background:#faf8ff;border-style:solid;box-shadow:0 0 0 3px rgba(137,111,224,.05)}
+.uploadPick{position:relative;display:flex;align-items:center;gap:12px;padding:13px 11px;min-height:64px;border-radius:11px;cursor:pointer;transition:background .15s}
+.uploadPick:hover{background:#f3edff}.uploadPick:focus-within{outline:3px solid rgba(115,86,215,.3);outline-offset:1px}
+.uploadPick .uploadIcon{font-size:28px;flex:none}.uploadPick strong{font-size:13px;color:#53428d;display:block}.uploadPick small{color:#8a829d;font-size:11px;display:block;margin-top:3px;line-height:1.5}
+.uploadPick .uploadInput{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;font-size:0}
+.uploadPick .uploadPlus{margin-left:auto;font-weight:900;color:#7955d8;background:#f0eafe;border-radius:10px;padding:4px 10px;font-size:18px;flex:none}
+.uploadSelected{border-top:1px dashed #dacff4;padding:12px 8px 5px;margin-top:3px}.uploadSelected[hidden]{display:none!important}
+.uploadSelectedTitle{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.uploadSelectedTitle strong{font-size:13px;color:#405e50}.uploadSelectedTitle span{font-size:11px;color:#6847be;font-weight:900;background:#efe9ff;border-radius:99px;padding:3px 9px}
+.uploadFileGrid{display:grid;grid-template-columns:1fr;gap:8px}
+.uploadFileCard{display:flex;align-items:center;gap:10px;background:white;border:1px solid #e3dbf5;padding:9px 10px;border-radius:11px;min-width:0;box-shadow:0 3px 9px rgba(80,58,140,.04)}
+.uploadFileThumb{width:43px;height:48px;flex:none;border-radius:9px;background:#f0edff;display:grid;place-items:center;font-size:12px;font-weight:900;color:#6451b1;overflow:hidden}.uploadFileThumb.image{background:#eee}
+.uploadFileThumb img{width:100%;height:100%;object-fit:cover}
+.uploadFileThumb.pdf{color:#da4a66;background:#ffeef2}.uploadFileThumb.txt{color:#4183a9;background:#eaf8ff}
+.uploadFileInfo{flex:1;min-width:0}.uploadFileName{font-size:12px;font-weight:850;display:block;overflow-wrap:anywhere;word-break:break-word;line-height:1.4}.uploadFileMeta{font-size:11px;color:#77748b;margin-top:2px;display:block}
+.uploadFileRemove{flex:none;background:#faf7ff;border:1px solid #e9e0fa;color:#7a6c9d;border-radius:8px;width:29px;height:29px;font-size:16px;font-weight:bold;display:grid;place-items:center;line-height:1}.uploadFileRemove:hover{background:#fff0f4;color:#ce4266;border-color:#f6c4d4}
+@media(min-width:600px){.uploadFileGrid:has(.uploadFileCard:nth-child(2)){grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.uploadHelp{font-size:11px;color:#6f668f;line-height:1.7;margin:9px 1px 0}
+.uploadHelp strong{color:#6742b4}
+.fileChip{word-break:break-all}
+.uploadBtns{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}.uploadBtns button{border:1px solid #dcd3f3;background:#fff;border-radius:10px;padding:8px 11px;font-size:12px;font-weight:800;color:#674aaf}.uploadBtns button:first-child{background:#7051d5;color:white;border-color:#7051d5}.uploadBtns button:disabled{background:#d9d3e4;border-color:#d9d3e4;color:white}
+.fileChips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.fileChip{font-size:11px;font-weight:750;border:1px solid #e4d9f5;border-radius:9px;padding:4px 8px;background:#fff}
+.uploadStatus{margin:10px 0 0;font-size:12px;color:#6d628d;line-height:1.55}.uploadStatus.fail{color:#bc335b}.uploadStatus.good{color:#25866d}
+.uploadProgress{height:6px;background:#eae6f3;border-radius:99px;overflow:hidden;margin-top:8px;display:none}.uploadProgress>div{height:100%;width:0;background:linear-gradient(90deg,#7e66ec,#f26ba9);transition:width .25s}
+.uploadPreview{margin:11px 0 0;border:1px solid #ece7f4;border-radius:10px;padding:11px;background:white;color:#53506a;font-size:12px;white-space:pre-wrap;max-height:160px;overflow:auto}
+.uploadFootnote{font-size:11px;line-height:1.65;color:#827b94;margin-top:9px}
+#textReview{margin-top:9px;display:none}
+#textReview label{font-size:12px;font-weight:900;display:block;margin-bottom:6px}
+#textReview textarea{width:100%;min-height:116px;border:1px solid #ddd7eb;border-radius:11px;padding:10px;font:12px/1.65 inherit;resize:vertical;background:white}
+.reviewActions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.reviewActions button{border:0;background:#eae4fd;border-radius:9px;padding:8px 10px;font-size:12px;font-weight:850;color:#513ea9}
+.reviewActions button:first-child{background:#276ec6;color:white}
+
+
+/* Curriculum and deliberate generation UX */
+.curriculumPanel{margin:16px 0 20px;background:linear-gradient(130deg,#f7faff 0%,#fffdf9 100%);border:1px solid #d9e5fc;border-radius:18px;padding:16px}
+.curriculumHeader{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.curriculumHeader strong{display:block;font-size:15px}.curriculumHeader small{color:var(--muted);display:block;font-size:11px;margin-top:5px}
+.standardFind{border:0;border-radius:12px;background:#315fc7;color:white;cursor:pointer;font-weight:850;padding:11px 15px;white-space:nowrap}
+.standardFind:hover{background:#244eab}.standardFind:disabled{opacity:.5;cursor:wait}
+.standardStatus{font-size:12px;color:#56627c;padding:12px 2px;line-height:1.7}
+.standardResults{display:grid;gap:8px;margin-top:3px}
+.standardChoice{display:flex;gap:9px;align-items:flex-start;padding:11px 12px;background:white;border:1px solid #dee6f7;border-radius:12px;cursor:pointer;line-height:1.55}
+.standardChoice input{flex:0 0 auto;accent-color:#386cce;margin-top:3px;transform:scale(1.1)}
+.standardChoice b{font-size:12px;color:#244d9f}.standardChoice p{margin:4px 0;font-size:12px}.standardChoice small{font-size:10px;color:#68758e}
+.standardChoice:has(input:checked){background:#eaf2ff;border-color:#749aed}
+.sourceFootnote{border-top:1px dashed #d7dfef;margin-top:12px;padding-top:11px;font-size:11px;line-height:1.7;color:#6d7389}.sourceFootnote a{color:#365fbe;text-decoration:underline}
+.generateArea{margin:20px 0 14px;text-align:center}.generateArea small{display:block;color:#7d7890;font-size:11px;margin-top:9px}
+.generateButton{background:linear-gradient(100deg,#e63f85,#7b57dc);border:0;border-radius:15px;box-shadow:0 12px 23px rgba(139,67,184,.19);color:white;cursor:pointer;width:100%;padding:17px;font-size:18px;font-weight:900}
+.generateButton span{float:right}.generateButton:hover{filter:brightness(1.07)}.generateButton:active{transform:translateY(2px)}
+.promptEmpty{min-height:290px;border:2px dashed #ded8f0;background:linear-gradient(130deg,#fffafd,#f7f7ff);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 18px}
+.promptEmpty .emptyIcon{font-size:46px;margin-bottom:14px}.promptEmpty b{font-size:16px}.promptEmpty p{font-size:12px;line-height:1.9;color:#79758f}
+.action button:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:700px){.curriculumHeader{align-items:stretch}.standardFind{width:100%}.curriculumPanel{padding:12px}}
+
+/* V6 — 파일을 먼저 읽는 단계형 구성 */
+.field input::placeholder,.field textarea::placeholder{color:#9a9bab;opacity:1}
+.inferenceBox{background:#f6f8ff;border:1px solid #dde4fa;padding:10px 13px;border-radius:12px;color:#62749c;font-size:12px;margin:5px 0 14px}
+.inferenceBox.good{background:#f0fcf7;color:#24765d;border-color:#beecda}
+.inferenceBox.warn{background:#fff9ef;color:#836034;border-color:#f5e2bb}
+.recommendArea{display:flex;align-items:center;justify-content:space-between;gap:13px;flex-wrap:wrap;background:#f9f6ff;border:1px solid #e8ddfa;padding:14px;border-radius:14px}
+.recommendArea b{font-size:13px;display:block}.recommendArea small{display:block;color:#77728a;font-size:11px;margin-top:4px}
+.recommendButton{flex:none;background:#7457db;border:0;color:white;border-radius:11px;padding:9px 14px;font-size:12px;font-weight:800}
+.recommendResult{padding:9px 0;min-height:37px}.recommendGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:6px}
+.recommendCard{border:1px solid #e6e3f3;background:#fff;border-radius:12px;padding:12px 10px;text-align:left;min-height:90px}
+.recommendCard:hover{background:#f9f7ff;border-color:#b9a3fa}.recommendCard strong{font-size:12px;display:block;color:#524894;margin-bottom:4px}
+.recommendCard small{display:block;font-size:10.5px;color:#766f8b}.recommendCard span{color:#a06cc0;font-weight:800;font-size:10px}
+@media(max-width:680px){.recommendGrid{grid-template-columns:1fr}.recommendCard{min-height:unset}}
+
+.featureTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap}.featureTitle label{margin:0}.featureRecs{margin-top:10px;display:grid;gap:7px}.featureRecsIntro{font-size:12px;color:#6a5f85}.featureRec{width:100%;display:flex;align-items:flex-start;text-align:left;gap:10px;padding:11px 13px;border:1px solid #e8ddff;background:#fcfaff;border-radius:12px;color:#494063;font:inherit;font-size:12px;line-height:1.6}.featureRec:hover{background:#f0eaff;border-color:#bca5ee}.featureRec b{display:inline-flex;width:23px;height:23px;flex:none;border-radius:50%;align-items:center;justify-content:center;background:#e8ddfb;color:#7154ad}
+
+.rangeOptions{margin:10px 0 8px;border:1px solid #e5dcf9;border-radius:12px;background:rgba(255,255,255,.78);padding:10px 12px;font-size:13px;color:#5c5379}
+.rangeOptions summary{cursor:pointer;font-weight:750;color:#614fb5}
+.rangeInputs{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 7px}
+.rangeInputs label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:750}
+.rangeInputs input{width:110px;min-height:35px;padding:6px 9px;border:1px solid #dcd5ef;border-radius:8px;background:#fff;color:#232540}
+.rangeOptions small{color:#77738f;line-height:1.4;display:block}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topinner"><div class="brand"><span class="brandmark">🧪</span> PROMPT LAB <span style="font-weight:600;color:#a99fba;font-size:12px">by 초미녀현진쌤</span></div><span class="topbadge">API 불필요 · 자료 인식 시 인터넷 필요</span></div></div>
+<header class="hero"><div class="heroInner"><div class="heroText"><div class="eyebrow">TEACHER'S CREATIVE TOOLKIT</div><h1>교과서 속 내용이 <em>게임</em>이 된다!<br>수업앱 프롬프트 제조기 ✨</h1><p>퀴즈는 기본, 방탈출·RPG·미연시형 스토리까지!<br>선생님은 아이디어만 입력하고, 코드는 익숙한 AI에게 맡기세요.</p></div><div class="heroArt"><div class="orb"></div><div class="robot">🤖</div><div class="sticker">“앗, 수업 준비하다 게임 출시할 뻔?”</div></div></div></header>
+<main class="work">
+  <div class="leftCol">
+  <section class="panel">
+    <div class="panelHead"><span class="stepnum">1</span><div><h2>수업 정보부터 알려주세요</h2><small>① 과목·단원·대상 입력 → ② 교과서 첨부 → ③ 핵심 내용 추출</small></div></div>
+    <div class="pad">
+      <div class="sectiontitle">✏️ ① 수업 정보 입력 <span class="softtitle">먼저 세 가지를 입력해 주세요</span></div>
+      <div class="rowfields"><div class="field"><label for="subject">과목명 (2022 개정 교육과정)</label><input id="subject" placeholder="예: 세포와 물질대사" autocomplete="off"/></div><div class="field"><label for="unit">단원명</label><input id="unit" placeholder="예: 세포호흡" autocomplete="off"/></div></div>
+      <div class="field" style="margin-top:12px"><label for="grade">학습 대상</label><select id="grade"><option value="">학습 대상을 선택하세요</option><option>고등학생</option><option>중학생</option><option>초등학생</option><option>교사 연수 참여자</option></select></div>
+      <div class="inferenceBox" id="inferenceResult" aria-live="polite">✅ 입력한 과목·단원·대상을 기준으로 핵심 문장을 추립니다. 파일을 분석해도 수업 정보는 임의로 바뀌지 않습니다.</div>
+      <div class="sectiontitle" style="margin-top:19px">📚 ② 교과서 파일 첨부 <span class="softtitle">선생님이 정한 수업 범위만큼</span></div>
+      <div class="uploadPanel" id="filePanel">
+        <div class="uploadHeader"><span style="font-size:23px">📚</span><div><strong>수업 범위에 맞춰 교과서 읽기</strong><small>먼저 작성한 과목·단원·학습 대상을 바탕으로 관련 핵심 내용의 초안을 추출합니다.</small></div></div>
+        <div class="uploadDrop" id="uploadDrop">
+          <label class="uploadPick" for="sourceFiles">
+            <input accept=".pdf,application/pdf,.png,.jpg,.jpeg,.webp,.txt,.md,image/png,image/jpeg,image/webp,text/plain" aria-label="PDF 또는 교과서 사진 파일 추가" class="uploadInput" id="sourceFiles" multiple type="file"/>
+            <span aria-hidden="true" class="uploadIcon">📎</span>
+            <span><strong id="uploadPickTitle">PDF · 교과서 사진 선택하기</strong><small id="uploadPickHelp">PDF · PNG · JPG · WEBP · TXT / 최대 5개, 파일당 30MB 이하</small></span>
+            <span class="uploadPlus" aria-hidden="true">+</span>
+          </label>
+          <div class="uploadSelected" id="uploadSelected" hidden>
+            <div class="uploadSelectedTitle"><strong>✅ 첨부된 교과서 파일</strong><span id="uploadSelectedCount">0 / 5개</span></div>
+            <div class="uploadFileGrid" id="uploadFileGrid"></div>
+          </div>
+        </div>
+        <div class="uploadHelp">단원 일부부터 여러 쪽, 단원 전체까지 첨부할 수 있어요. 분량이 많거나 스캔 PDF라면 읽는 데 시간이 걸립니다.</div>
+        <details class="rangeOptions" id="rangeOptions">
+          <summary>📑 PDF에서 필요한 쪽만 분석하고 싶어요 (선택 사항)</summary>
+          <div class="rangeInputs">
+            <label for="pageStart">시작 쪽 <input id="pageStart" type="number" inputmode="numeric" min="1" placeholder="1" /></label>
+            <label for="pageEnd">마지막 쪽 <input id="pageEnd" type="number" inputmode="numeric" min="1" placeholder="마지막 쪽" /></label>
+          </div>
+          <small>입력하지 않으면 PDF 전체를 읽습니다. 여러 PDF를 첨부하면 각 PDF에 같은 쪽 범위를 적용합니다.</small>
+        </details>
+        <div class="uploadBtns"><button id="readFiles" type="button">🎯 핵심 내용 추출하기</button><button id="aiReview" type="button">✨ AI 정밀 분석 요청문 복사</button><button id="clearFiles" type="button">파일 지우기</button></div>
+        <div class="uploadProgress" id="uploadProgress"><div id="uploadProgressBar"></div></div>
+        <div aria-live="polite" class="uploadStatus" id="uploadStatus" role="status">📌 먼저 수업 정보 세 가지를 입력해 주세요. PDF·사진의 문자 인식에는 인터넷 연결이 필요할 수 있으며 파일은 브라우저에서 처리됩니다.</div>
+        <div id="textReview" style="display:none"><div class="reviewActions"><button id="showFullText" type="button">📖 인식된 원문 확인하기</button></div><pre class="uploadPreview" id="rawExtract" style="display:none"></pre></div>
+        <div class="uploadFootnote">ℹ️ API가 없는 버전입니다. 2022 개정 교육과정의 개념 이해·탐구·적용 관점을 반영해 문장 후보를 선별하지만, 공식 성취기준과 자동 대조하거나 생성형 AI처럼 내용을 이해해 요약하지는 않습니다. 원문을 확인하고 수정해 주세요.</div>
+      </div>
+      <div class="sectiontitle" style="margin-top:19px">🎯 ③ 핵심 내용 초안 확인 <span class="softtitle">추출 후 자유롭게 수정</span></div>
+      <section aria-label="수업 핵심 내용 — 하나의 입력칸" class="curriculumPanel" id="learningPanel">
+<div class="curriculumHeader"><div><strong>학생이 꼭 이해해야 할 수업 핵심 내용</strong><small>첨부한 교과서에서 중요한 문장 후보를 선별합니다. 교사가 사실·수치·용어를 검토해 주세요.</small></div></div>
+<div class="field" style="margin-top:12px"><textarea id="keyLearning" placeholder="이렇게 입력해 보세요:
+• 세포호흡의 단계와 장소를 구분한다.
+• 기질 수준 인산화와 산화적 인산화를 비교한다.
+• ATP 생성 과정의 특징을 설명한다.
+
+위의 수업 정보를 작성한 뒤 파일을 첨부하고 「핵심 내용 추출하기」를 누르면 이 칸에 초안이 들어옵니다." rows="8"></textarea></div>
+<div class="sourceFootnote">✅ 이 한 칸만 최종 프롬프트에 반영됩니다. 교과서에 없는 성취기준 번호·사실을 추가하지 않고, 검토한 내용만 사용하세요.</div>
+</section>
+    </div>
+  </section>
+  <section class="panel" style="margin-top:19px">
+    <div class="panelHead"><span class="stepnum">2</span><div><h2>어떤 수업앱을 만들어볼까요?</h2><small>추천을 받아도 좋고, 19가지 장르 중 자유롭게 고를 수도 있어요</small></div></div>
+    <div class="pad">
+      <div class="recommendArea">
+        <div><b>💡 내 수업에 어울리는 장르 추천</b><small>입력한 수업 정보와 검토한 핵심 내용을 토대로 추천합니다 (API 없는 키워드 규칙 분석)</small></div>
+        <button class="recommendButton" type="button" id="recommendGenre">🤖 장르 추천받기</button>
+      </div>
+      <div id="recommendResult" class="recommendResult" aria-live="polite"><span class="softtitle">수업 정보를 입력하고 교과서 핵심 내용을 확인한 다음 추천 버튼을 눌러보세요.</span></div>
+      <div class="sectiontitle" style="margin-top:18px">🎮 직접 고르기 <span class="softtitle">선택한 장르는 계속 유지됩니다</span></div>
+      <div aria-label="게임 유형 필터" class="genresTop" id="filters" role="group"></div>
+      <div class="genres" id="genres"></div>
+      <div class="tip"><span>💡</span><span id="genreTip">장르를 선택하면 여기에서 해당 장르의 제작 요령을 알려드려요.</span></div>
+    </div>
+  </section>
+  <section class="panel" style="margin-top:19px">
+    <div class="panelHead"><span class="stepnum">3</span><div><h2>원하는 기능을 간단히 적어주세요</h2><small>핵심 기능과 취향만 적고, 복잡한 코딩 지시는 자동으로 만듭니다</small></div></div>
+    <div class="pad">
+      <div class="field"><div class="featureTitle"><label for="features">꼭 필요한 핵심 기능 <span>한두 문장으로 적어주세요</span></label><button type="button" id="recommendFeatures" class="recommendButton">✨ 기능 추천받기</button></div><textarea class="smaller" id="features" placeholder="이렇게 입력해 보세요: 학생이 세포호흡 단계 카드를 고르면 장소·핵심 특징을 비교하도록 해줘."></textarea><div class="hintsmall">💡 선택한 장르와 핵심 내용에 맞는 기능을 추천합니다. 이 버튼은 API 없는 규칙 기반 추천입니다.</div><div id="featureRecs" class="featureRecs" aria-live="polite"></div></div>
+      <hr/>
+      <div class="sectiontitle">🎨 제작 취향과 범위</div>
+      <div class="rowfields"><div class="field"><label for="style">화면 디자인</label><select id="style"><option>귀여운 파스텔 웹툰</option><option>게임 콘솔 / 픽셀 아트</option><option>깔끔한 교육용 대시보드</option><option>판타지 RPG</option><option>미스터리 / 추리 보드</option><option>레트로 아케이드</option><option>미니멀 흑백</option></select></div><div class="field"><label for="difficulty">제작 난도</label><select id="difficulty"><option value="quick">⚡ 초보형 — 먼저 작동하게</option><option selected="" value="standard">🌱 표준형 — 기능과 디자인 균형</option><option value="advanced">🚀 도전형 — 분기와 기능 풍성하게</option></select></div></div>
+      <div class="sectiontitle">🎯 추가하고 싶은 요소 <span class="softtitle">여러 개 선택 가능</span></div>
+      <div class="checks" id="addons"></div>
+      <hr/>
+      <details class="advanced" id="advanced"><summary>⚙️ 선택 입력: 세계관·등장인물·정답·수식 등 <span style="color:#9f95b8">(열기 ▾)</span></summary>
+<div class="field"><label for="setting">세계관 / 배경 / 등장인물</label><textarea class="smaller" id="setting" placeholder="예: 세포 마을에서 리보솜·미토콘드리아 캐릭터와 대화. 인물별 성격은 다르게."></textarea></div>
+<div class="field"><label for="answer">정답 / 채점 기준 / 정확한 수식</label><textarea class="smaller" id="answer" placeholder="예: 효소 활성 변화는 첨부한 그래프 기준. 함수 식은 y=(x-2)²+1"></textarea><div class="hintsmall">특히 과학 시뮬레이션은 근거 없는 가상 수치를 실험 결과처럼 제시하지 않도록 주의합니다.</div></div>
+<div class="field" style="margin-bottom:0"><label for="notes">그 밖의 요청 / 제한사항</label><textarea class="smaller" id="notes" placeholder="예: 한 화면에 하나의 미션만, 버튼 크게, 학생 개인 정보 입력 금지"></textarea></div>
+</details>
+      <div class="generateArea"><button class="generateButton" id="generatePrompt" type="button">✨ 프롬프트 제작하기 <span>→</span></button><small>오른쪽 결과창은 이 버튼을 누를 때만 생성됩니다. 설정을 바꾸면 다시 눌러주세요.</small></div>
+      <div class="savebox"><button class="subbutton" id="saveLocal" type="button">💾 내 설정 저장</button><button class="subbutton" id="loadLocal" type="button">📂 저장된 설정 불러오기</button><button class="subbutton" id="reset" type="button">↩ 처음으로</button></div>
+      <div class="hintsmall">내 설정 저장은 원할 때만 누르세요. 학생 개인 정보는 입력하지 마세요.</div>
+    </div>
+  </section>
+</div>
+<aside class="rightCol"><section class="panel"><div class="resultHead"><div><h2>🪄 AI에게 전달할 마법 주문</h2><p>설정 완료 후 「프롬프트 제작하기」를 누르면 나타납니다</p></div><div style="font-size:25px">📜</div></div>
+    <div class="resultPad"><div class="state"><i class="dot"></i><span id="stateText">복사해서 AI에 붙여넣으면 됩니다</span><span id="count" style="margin-left:auto"></span></div>
+      <div id="promptEmpty" class="promptEmpty"><div class="emptyIcon">🪄</div><b>아직 프롬프트를 만들지 않았어요!</b><p>왼쪽에서 수업과 앱 종류를 설정한 뒤<br>「프롬프트 제작하기」를 눌러주세요.</p></div><pre id="prompt" class="promptBox" aria-live="polite" style="display:none"></pre>
+      <div class="action"><button class="primary" id="copy">📋 프롬프트 복사하기</button><button class="outline" id="download">⬇ TXT 저장</button></div>
+      <div class="linkrow"><span style="font-size:11px;color:#9489a8;font-weight:800">AI 열기 →</span><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT ↗</a><a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude ↗</a><a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini ↗</a></div>
+      <div class="tinyRule">📌 <b>이번 연수의 목표:</b> 이곳에서 만든 프롬프트를 <b>새 AI 대화창에 붙여넣고</b>, 생성된 전체 코드를 <b>메모장 → index.html 저장 → 브라우저로 실행</b>하는 것! 여러 AI 중 익숙한 도구를 선택하셔도 됩니다.</div>
+      <p class="under">제조기는 AI에 직접 접속하거나 코드를 자동 생성하지 않습니다. 파일 글자 추출에는 외부 프로그램 파일을 인터넷에서 불러오지만, 원본 파일은 브라우저에서 처리하도록 구성했습니다. AI에 붙여넣거나 다시 첨부할 때부터 해당 AI 서비스에 자료가 전달됩니다.</p>
+    </div>
+  </section></aside>
+</main>
+<footer class="footer">© 초미녀현진쌤의 수업앱 프롬프트 제조기 · 개인정보 입력 없이, 작은 기능부터 시작해요. · 생성된 앱의 내용 정확성은 수업 전 반드시 확인하세요.</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(()=>{
+'use strict';
+const $=(id)=>document.getElementById(id);
+const genres=[
+ {id:'quiz',g:'기초',icon:'📝',name:'퀴즈쇼',desc:'문제·점수·해설',summary:'순차형 객관식 퀴즈, 정답/오답 피드백, 해설, 최종 점수',mechanics:'학습 내용에 근거해 5~8개의 퀴즈를 만들고 문제를 한 번에 하나씩 보여준다. 문제마다 보기 3~4개, 정답/오답 판정, 이유 설명, 점수 집계, 결과 화면, 다시하기를 구현한다. 정답과 해설은 교사가 제공한 학습 내용을 우선하며 불확실한 문제는 출제하지 않는다.',tip:'🌱 가장 쉬운 시작! 30분 실습에서는 퀴즈 3문제부터 만들어도 성공이에요.'},
+ {id:'ox',g:'기초',icon:'✅',name:'OX 대결',desc:'참·거짓을 가려라',summary:'O/X 질문에 빠른 반응, 오개념 정정, 정답률',mechanics:'학습 개념에 대한 참/거짓 문제를 단계적으로 제시하고 O/X 버튼으로 응답하게 한다. 즉시 정오답과 개념 해설을 주고, 문제마다 학습 목표를 연결한다. 전체 정답률, 오답 다시 보기, 재시작을 구현한다.',tip:'✅ 초보에게 추천! 문항 수를 적게 시작하고 문제를 확장해 보세요.'},
+ {id:'cards',g:'기초',icon:'🃏',name:'카드 뒤집기',desc:'개념·정의 매칭',summary:'앞뒤 카드와 개념 짝 맞히기',mechanics:'학습 용어와 설명을 카드 쌍으로 만들고 뒤집어 짝을 찾게 한다. 셔플, 클릭 시 뒤집힘, 맞은 쌍 고정, 시도 횟수, 성공 화면, 다시하기를 구현한다. 같은 카드를 중복해서 만든 척하지 않는다.',tip:'🃏 어휘·용어·인물·공식 등을 외우는 활동에 유용해요.'},
+ {id:'sequence',g:'기초',icon:'🧩',name:'순서 배열',desc:'절차·연표·과정',summary:'사건과 단계를 올바른 순서로 배열',mechanics:'단계 카드를 섞어 보여주고 학생이 버튼 또는 드래그 대신 안전한 위/아래 조작으로 재배열하게 한다. 확인 시 올바른 순서와 단계별 이유를 설명하고 재도전할 수 있게 한다.',tip:'🧩 역사 연표, 실험 절차, 문학 전개 순서에 잘 어울려요.'},
+ {id:'novel',g:'스토리',icon:'🌸',name:'미연시형 비주얼 노벨',desc:'캐릭터·호감도·엔딩',summary:'대화 선택지에 따라 인물 관계와 엔딩이 바뀌는 학습용 비주얼 노벨',mechanics:'학생이 인물과 대화하는 비주얼 노벨 구조를 만든다. 이름과 성격이 다른 주요 캐릭터 2~3명, 장면별 대사창, 2~3개의 선택지, 인물별 호감도 또는 신뢰도(0~100), 분기되는 장면, 서로 다른 결말 2~3개를 포함한다. 선택지가 단지 숫자만 바꾸지 않고 학습 개념의 이해·판단과 연결되게 한다. 호감도 변화의 이유를 자연스럽게 설명한다. 캐릭터 외형은 외부 이미지 대신 CSS 또는 이모지/내장 SVG로 표현한다. 학생용이므로 건전하고 연령에 적절한 관계·우정·협력 중심으로 설계한다.',tip:'🌸 미연시 감성은 살리고 수업 목표는 놓치지 않기! 연수에서는 캐릭터 2명·엔딩 2개로 시작하세요.'},
+ {id:'story',g:'스토리',icon:'📖',name:'선택형 스토리',desc:'이야기 분기·여러 결말',summary:'결정에 따라 스토리와 학습 결과가 변화하는 인터랙티브 이야기',mechanics:'도입–갈등–선택–결과 구조를 갖춘 이야기를 구성한다. 4~6개 장면, 매 장면에서 선택지 2~3개, 앞서 선택한 행동의 결과 반영, 서로 다른 엔딩 2~3개, 각 결말의 학습 해설과 다시하기를 구현한다. 선택지의 결과는 교과 개념에 맞도록 만든다.',tip:'📖 선택지는 많아 보여도 실제 제작은 4장면만 시작하면 됩니다.'},
+ {id:'interview',g:'스토리',icon:'🎭',name:'캐릭터 인터뷰',desc:'교과 인물과 대화',summary:'역사 인물·과학 개념 캐릭터와 선택형 인터뷰',mechanics:'교과 내용에 기반한 가상의 인터뷰 장면을 만든다. 학생은 질문 카드나 선택지를 골라 등장인물의 반응을 살펴본다. 반응은 실제 학습 사실에 근거하고 각 장면의 학습 포인트를 명시한다. 실제 인물의 허구 대사는 학습용 재구성임을 화면에 밝힌다.',tip:'🎭 역사·문학·과학에서 캐릭터가 직접 설명하는 형식이에요.'},
+ {id:'escape',g:'게임',icon:'🔐',name:'교과 방탈출',desc:'단서·퍼즐·잠금 해제',summary:'학습 문제를 해결하며 잠긴 방에서 탈출',mechanics:'목표와 배경이 명확한 방탈출 게임을 만든다. 서로 연결된 퍼즐 3~5개, 단계별 힌트 2개, 해결한 퍼즐 기록, 자물쇠/암호 입력, 성공 애니메이션, 다시 시작을 구현한다. 퍼즐 답은 제공된 교과 내용으로 검증 가능해야 하며 무리한 추측으로만 풀리게 하지 않는다.',tip:'🔐 핵심 개념을 암호 힌트로! 단서 3개로 시작하면 관리하기 쉬워요.'},
+ {id:'mystery',g:'게임',icon:'🕵️',name:'추리 사건파일',desc:'증거·용의자·가설',summary:'증거를 비교해 사건의 진상을 추리',mechanics:'사건 요약, 용의자 또는 가설 후보 3개, 조사 가능한 증거 카드 4~6개, 증거 열람 기록, 최종 결론 선택, 근거 확인, 사건 해설 화면을 구현한다. 진실과 오답 판정은 교과 사실 또는 명시된 허구 설정과 논리적으로 일치해야 한다.',tip:'🕵️ 탐구·자료 해석·사료 분석 수업에 적합해요.'},
+ {id:'rpg',g:'게임',icon:'🗡️',name:'미니 RPG',desc:'탐험·퀘스트·성장',summary:'학습 미션을 해결하며 지역을 탐험하는 RPG',mechanics:'간단한 맵 또는 방 선택, 플레이어 상태(경험치/레벨/체력 중 1~2개), 학습 퀘스트 3~5개, 선택에 따른 결과, 보상, 최종 보스를 구현한다. 보스전과 미션 해결이 교과 내용의 이해를 실제로 확인하도록 설계한다. 외부 이미지 없는 SVG/CSS 캐릭터를 우선한다.',tip:'⚔️ RPG는 화려해 보이지만 화면 3개와 미션 3개부터 시작할 수 있어요.'},
+ {id:'tycoon',g:'게임',icon:'🏪',name:'경영·타이쿤',desc:'자원·예산·전략',summary:'자원을 투자하고 결과를 관리하는 의사결정 게임',mechanics:'초기 예산 또는 자원, 선택 가능한 투자/운영 행동, 행동 후 자원 변화, 성과 지표, 5~8턴의 진행, 성공/실패 조건과 피드백을 구현한다. 비용·효과는 사용자에게 제시된 근거에 기반하고, 실제 자료가 없으면 가상 교육 모형임을 명시한다.',tip:'🏪 경제·기술가정·환경 프로젝트와 잘 맞아요.'},
+ {id:'battle',g:'게임',icon:'⚡',name:'카드 배틀',desc:'능력카드·전략대결',summary:'개념의 관계와 규칙을 이용한 턴제 배틀',mechanics:'학습 개념마다 카드와 능력을 정의하고 턴제 전투를 만든다. 플레이어/상대 자원, 카드 6장 이상, 카드 효과의 근거 설명, 적절한 밸런스, 승리 조건과 재시작을 포함한다. 불필요한 폭력 표현 대신 퀴즈·전략 대결처럼 건전하게 표현한다.',tip:'⚡ 원소·생태계·영어 표현을 카드 능력으로 변환할 수 있어요.'},
+ {id:'board',g:'게임',icon:'🎲',name:'주사위 보드',desc:'칸 이동·이벤트',summary:'주사위 이동과 학습 미션이 결합된 보드게임',mechanics:'이동 가능한 보드 12~20칸, 주사위 던지기, 칸별 개념 질문/이벤트, 점수, 진행 상황, 도착 조건, 다시하기를 구현한다. 자동 주사위 로직과 게임 상태를 정확히 관리한다.',tip:'🎲 모둠 간 경쟁을 붙이는 수업에 추천해요.'},
+ {id:'time',g:'게임',icon:'⏱️',name:'타임어택',desc:'제한시간·콤보',summary:'제한 시간 안에 개념 미션을 해결하는 챌린지',mechanics:'카운트다운 타이머, 문제 또는 도전 과제, 정답 연속 콤보/점수, 제한시간 종료 결과, 다시 시작을 구현한다. 시간이 끝나면 조작을 막고 기록이 안정적으로 표시되게 한다.',tip:'⏱️ 수업 시작 5분 또는 마무리 5분에 잘 맞는 장르예요.'},
+ {id:'map',g:'게임',icon:'🗺️',name:'지도 탐험',desc:'지역·역사·위치',summary:'지역을 선택하고 탐색하며 미션을 수행',mechanics:'HTML/SVG로 제작한 단순화 지도 또는 위치 선택 영역, 장소별 정보 카드, 장소별 미션, 방문 완료 표시, 전체 탐험 진행률, 완주 화면을 구현한다. 실제 위치와 경계는 임의로 정밀한 것처럼 묘사하지 말고 필요한 경우 개념도임을 표시한다.',tip:'🗺️ 지리·역사·지역문화 수업용으로 좋아요.'},
+ {id:'sim',g:'시뮬레이션',icon:'🧪',name:'변인 실험실',desc:'조건 조작·관찰·그래프',summary:'조건 변경에 따른 결과 비교가 가능한 교육용 실험',mechanics:'독립변인 1~3개를 슬라이더 또는 선택지로 조절하고, 결과를 표·그래프 또는 시각 변화로 보여준다. 초기화, 조건 비교, 예측 질문과 결과 해설을 구현한다. 명시된 계산식·실험 근거가 없으면 결과는 예시/정성 모형이라고 명확히 표시하고 실제 측정 데이터처럼 제시하지 않는다. 정량적 결과를 임의 수치로 확정하지 않는다.',tip:'🧪 실제 수치가 없을 때는 반드시 교육용 모형이라고 표시해야 합니다.'},
+ {id:'graph',g:'시뮬레이션',icon:'📈',name:'움직이는 그래프',desc:'계수 조절·좌표 변화',summary:'숫자 입력과 슬라이더로 그래프를 탐색',mechanics:'제공된 수학 함수 또는 과학 관계식에 따라 좌표·그래프를 Canvas 2D 또는 SVG로 그린다. 슬라이더/수치 입력을 바꾸면 실시간으로 곡선 또는 도형을 다시 그린다. 축·단위·격자·범례를 표시하고 입력값 유효성을 확인한다. 주어진 식이 없으면 데이터 근거를 먼저 확인하고 임의의 과학 법칙을 만들지 않는다.',tip:'📈 이차함수, 운동, 지수 변화 등에서 시각적 이해를 높여줘요.'},
+ {id:'ecosystem',g:'시뮬레이션',icon:'🌱',name:'육성 시뮬레이션',desc:'환경 선택·성장 변화',summary:'선택한 조건에 따라 캐릭터나 생물이 성장하는 시뮬레이션',mechanics:'성장 또는 육성 대상의 상태 2~3개, 시간 진행, 환경 조건 변경, 상태 변화, 성장 단계, 경고 및 회복 안내, 학습 해설을 구현한다. 실물 생물의 성장처럼 과학적 근거가 필요한 경우 단순화 또는 가상 시뮬레이션임을 구체적으로 표시한다.',tip:'🌱 식물·생태계·개인 습관 형성 등으로 변형할 수 있어요.'},
+ {id:'decision',g:'시뮬레이션',icon:'⚖️',name:'선택의 결과',desc:'윤리·정책·의사결정',summary:'정책/행동 선택으로 여러 지표와 이해관계가 변화',mechanics:'현재 상황, 이해관계자 또는 지표 2~4개, 선택지 3개 이상, 결과 피드백, 장단점 비교, 최종 성찰 질문을 구현한다. 인과관계가 확실하지 않으면 가정에 따른 시나리오임을 표시하고 단일 정답을 강요하지 않는다.',tip:'⚖️ 윤리·사회·정치·진로 프로젝트에 추천해요.'}
+];
+const addonsList=[['hint','힌트'],['feedback','오답 해설'],['progress','진행도'],['score','점수·상태창'],['timer','타이머'],['restart','다시하기'],['save','기기 내 진행 저장'],['sound','간단한 효과음']];
+const filterList=['전체','기초','스토리','게임','시뮬레이션'];
+let filter='전체',selected='quiz';
+let documentSourceNote='';
+const values={};
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function toast(s){const x=$('toast');x.textContent=s;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),2500);}
+function drawFilters(){$('filters').innerHTML=filterList.map(g=>`<button type="button" class="filter ${filter===g?'active':''}" data-filter="${g}">${g==='전체'?'✨ ':''}${g}</button>`).join('');$('filters').querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;drawFilters();drawGenres();}));}
+function drawGenres(){const show=genres.filter(x=>filter==='전체'||x.g===filter);$('genres').innerHTML=show.map(g=>`<button type="button" class="genre ${g.id===selected?'active':''}" data-id="${g.id}" aria-pressed="${g.id===selected}"><span class="genreEmoji" aria-hidden="true">${g.icon}</span><span><span class="genreName">${escapeHTML(g.name)}</span><span class="genreDesc">${escapeHTML(g.desc)}</span></span></button>`).join('');$('genres').querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>{selected=el.dataset.id;drawGenres();update();}));$('genreTip').textContent=genres.find(x=>x.id===selected).tip;}
+function drawAddons(){const initial=new Set(['hint','feedback','progress','restart']);$('addons').innerHTML=addonsList.map(([id,title])=>`<label class="check"><input type="checkbox" value="${id}" ${initial.has(id)?'checked':''}><span>${title}</span></label>`).join('');$('addons').querySelectorAll('input').forEach(x=>x.addEventListener('change',update));}
+function value(id){return $(id).value.trim();}
+function selectedAddons(){return [...$('addons').querySelectorAll('input:checked')].map(el=>addonsList.find(x=>x[0]===el.value)[1]);}
+function settingBlock(){const parts=[];if(value('setting'))parts.push('- 세계관·배경·등장인물: '+value('setting'));if(value('answer'))parts.push('- 정답·채점기준·공식·데이터: '+value('answer'));if(value('notes'))parts.push('- 추가 요청 및 제한: '+value('notes'));return parts.length?parts.join('\n'):'- 추가 설정: 없음 (수업 내용을 우선으로, 지나치게 복잡하지 않게 구성)';}
+const scope={quick:'먼저 작동하는 최소 버전(MVP)을 만들어. 한 번에 너무 많은 기능을 넣지 말고 주요 화면 2~3개, 핵심 상호작용 1개부터 완성해.',standard:'완성도와 안정성의 균형을 맞춰. 핵심 화면 3~5개, 학습 피드백, 자연스러운 전환과 기본 오류 처리를 포함해.',advanced:'다단계 콘텐츠와 풍성한 분기·상태 변화, 세련된 반응형 UI, 진행 상태 관리, 주요 예외 처리까지 자세히 구현해. 그래도 외부 의존성은 사용하지 마.'};
+function basicInfo(){const g=genres.find(x=>x.id===selected);return {g,header:`[수업 정보]\n- 과목: ${value('subject')||'과목 미확정 (교사 확인 필요)'}\n- 단원: ${value('unit')||'단원명 미확정 (교사 확인 필요)'}\n- 대상: ${value('grade')||'학습 대상 확인 필요'}\n- 수업 핵심 내용(교사가 지정한 과목·단원 범위에서 추출·검토한 내용):\n${value('keyLearning')||'(핵심 내용 미입력: 학생 대상 설명이나 정답을 임의로 확정하지 말고 필요한 교과 개념을 교사에게 질문하세요)'}${documentSourceNote?"\n- 자료 확인 참고: "+documentSourceNote:""}\n\n[만들 앱의 핵심]\n- 앱 장르: ${g.name} — ${g.summary}\n- 교사가 반드시 원하는 기능: ${value('features')||'학생이 버튼을 눌러 학습 결과를 확인하는 핵심 상호작용'}\n- 화면 분위기: ${value('style')}\n- 더할 요소: ${selectedAddons().join(', ')||'없음'}\n\n[선택한 추가 설정]\n${settingBlock()}`};}
+function createPrompt(){const {g,header}=basicInfo();return `당신은 교과 학습을 설계하는 교육 전문가이자, 설치 없이 실행되는 HTML 교육용 앱을 만드는 숙련된 프런트엔드 개발자입니다.\n\n나는 코딩을 거의 모르는 교사입니다. 아래 정보만으로 학생이 실제로 조작할 수 있는 게임형 수업앱을 완성해 주세요. 아이디어 설명만 하지 말고, 바로 실행 가능한 코드를 작성하세요.\n\n${header}\n\n[${g.name} 장르에 맞는 게임 설계 지침]\n${g.mechanics}\n\n[제작 범위]\n${scope[value('difficulty')]}\n\n[학생 경험과 교육적 정확성]\n1. 학생은 앱을 열자마자 무엇을 해야 하는지 이해할 수 있어야 합니다. 첫 화면에 목적과 조작 방법을 짧게 보여주세요.\n2. 설명만 나열하지 말고 클릭·선택·조절·탐색 같은 상호작용을 중심으로 구성하세요.\n3. 이 메시지는 새 대화창에 복사해 보내는 독립된 제작 요청입니다. 별도의 PDF·이미지는 전달되지 않았으므로 원본을 직접 읽었다고 주장하지 말고, 여기 적힌 과목·단원·학습 대상·수업 핵심 내용만을 바탕으로 앱을 완성하세요. 2022 개정 교육과정의 취지에 맞춰 학생이 개념을 이해하고 직접 탐색·적용하게 하되, 확인되지 않은 성취기준 번호나 교과서 문구를 만들어내지 마세요.\n4. 학습 내용이 짧다면 널리 검증된 기초 설명만 최소한으로 보완해 바로 실행 가능한 앱을 구성하세요. 다만 수치·정답·실험 결과·공식처럼 근거가 필요한 세부 내용은 지어내지 마세요. 정확히 확인할 수 없는 부분은 해당 문제를 제외하거나, 예시·교육용 모형이라고 명시하세요. 완성 후 교사가 검토할 항목으로 따로 알려주세요. 틀린 선택에는 학생이 이해할 수 있는 짧은 해설을 제공하세요.\n5. 앱 내용은 ${value('grade')}에게 적절하고, 한국어 표현을 자연스럽게 사용하세요. 학생 이름·학번·연락처 등 개인정보 입력란은 만들지 마세요.\n6. 가상 이야기·가상 수치가 포함된다면, 사실과 교육용 설정을 구분해서 학생이 오해하지 않게 하세요.\n\n[기술 및 디자인 필수 규칙]\n1. HTML, CSS, JavaScript를 모두 포함한 '단일 HTML 파일' 한 개로 구현하세요. 외부 CSS/JS 라이브러리, CDN, API, 서버, DB, 외부 이미지/폰트 없이 완전히 오프라인에서 실행되어야 합니다.\n2. 학교 PC와 크롬북의 최신 브라우저에서 실행 가능하도록 순수 브라우저 기능만 사용하세요.\n3. 화면이 보기 좋고 사용하기 쉬워야 합니다. 가독성 좋은 큰 글씨, 명확한 버튼, 읽기 쉬운 색 대비, 1366×768 노트북 화면과 모바일에서 모두 사용 가능한 반응형 레이아웃으로 작성하세요.\n4. 그림은 CSS·SVG·이모지 등을 코드 안에서 직접 만들어 사용하세요. 외부 이미지 주소로 불러오지 마세요.\n5. 버튼이 모두 실제로 작동하고, 게임 진행·선택·점수·다시하기가 서로 충돌하지 않도록 상태를 일관되게 관리하세요.\n6. 코드 중간을 '이하 생략'처럼 빼지 말고, 완전한 <!DOCTYPE html>부터 </html>까지 전부 작성하세요.\n7. 추가 질문으로 제작을 멈추지 말고, 지금 주어진 정보만으로 가능한 범위에서 작동하는 첫 버전을 우선 만드세요. 정확한 사실 검증이 필요한 부분은 무리하게 콘텐츠를 추가하지 말고 최소 기능으로 구성하고, 생략한 내용을 마지막에 알려주세요.\n\n[출력 형식]\n첫째, 완성된 HTML 전체 코드를 하나의 html 코드 블록으로 출력하세요.\n둘째, 코드 다음에는 '메모장 열기 → 코드 붙여넣기 → 다른 이름으로 저장(index.html, 파일 형식: 모든 파일, 인코딩: UTF-8) → 더블클릭 실행' 순서를 네 줄 이하로 설명하세요.\n셋째, 실행 테스트 3가지와 교사가 확인할 수업 내용(자료에서 불완전하게 추출되었을 수 있는 부분 포함)을 짧게 적으세요. 원본 PDF를 볼 수 없다는 사실을 코드 설명에 불필요하게 반복하지 마세요.\n\n이제 위 조건으로 첫 번째 실행 가능한 버전을 만들어 주세요.`;}
+function invalidatePrompt(){
+ if(!promptIsGenerated)return;
+ $('stateText').textContent='⚠️ 설정이 변경되었습니다. 현재 결과는 이전 설정입니다. 「프롬프트 제작하기」를 다시 누르면 새 내용으로 교체됩니다.';
+}
+function update(){invalidatePrompt();}
+function generatePrompt(){
+ const text=createPrompt();
+ $('prompt').textContent=text;$('prompt').style.display='block';$('promptEmpty').style.display='none';
+ $('copy').disabled=false;$('download').disabled=false;$('count').textContent=text.length.toLocaleString()+'자';
+ $('stateText').textContent='완성! 복사한 후 새 AI 대화창에 붙여넣으세요.';promptIsGenerated=true;
+ $('prompt').scrollTop=0;toast('🪄 앱 제작용 프롬프트가 완성됐어요!');
+ if(innerWidth<1030)$('promptEmpty').closest('.panel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function getForm(){const o={};['subject','unit','grade','keyLearning','features','setting','answer','notes','style','difficulty'].forEach(id=>o[id]=value(id));o.selected=selected;o.addons=[...$('addons').querySelectorAll('input:checked')].map(x=>x.value);return o;}
+function setForm(o){if(!o.keyLearning&&o.content)o.keyLearning=o.content;['subject','unit','grade','keyLearning','features','setting','answer','notes','style','difficulty'].forEach(id=>{if(o[id]!==undefined && o[id]!==null) $(id).value=o[id]});selected=genres.some(g=>g.id===o.selected)?o.selected:'quiz';$('addons').querySelectorAll('input').forEach(x=>x.checked=Array.isArray(o.addons)?o.addons.includes(x.value):x.checked);filter='전체';drawFilters();drawGenres();update();}
+async function copyText(){if(!promptIsGenerated)return toast('먼저 프롬프트를 제작해 주세요!');const t=$('prompt').textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t);}else{const temp=document.createElement('textarea');temp.value=t;temp.style.position='fixed';temp.style.left='-10000px';document.body.appendChild(temp);temp.select();const ok=document.execCommand('copy');temp.remove();if(!ok)throw new Error('copy failed');}toast('📋 프롬프트가 복사됐어요! AI에 붙여넣으세요.');}catch(e){toast('복사 권한이 없어요. 프롬프트 영역을 선택해 직접 복사하세요.');}}
+function downloadText(){if(!promptIsGenerated)return toast('먼저 프롬프트를 제작해 주세요!');const t=$('prompt').textContent;const b=new Blob(['\ufeff',t],{type:'text/plain;charset=utf-8'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='수업앱_제작프롬프트.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);toast('TXT 파일로 저장했어요');}
+
+/* 교과서 읽기 도우미. API 키가 아닌 브라우저 내부 문자 추출로 동작하며,
+   PDF.js / Tesseract.js는 사용자가 파일 분석을 시작할 때 공개 CDN에서 불러옵니다. */
+let sourceFiles=[],extractedRaw='',extractedLines=[],readerBusy=false;
+let promptIsGenerated=false;
+const libPromise={};
+const PDF_ENDPOINTS=[
+  {js:'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',worker:'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'},
+  {js:'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js',worker:'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js'},
+  {js:'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js',worker:'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js'}
+];
+const OCR_LIB='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+function setReaderStatus(msg,kind=''){$('uploadStatus').className='uploadStatus '+kind;$('uploadStatus').textContent=msg;}
+function setProgress(n){$('uploadProgress').style.display='block';$('uploadProgressBar').style.width=Math.max(0,Math.min(100,n))+'%';}
+function loadScript(url,check){
+ if(check())return Promise.resolve();
+ if(libPromise[url])return libPromise[url];
+ libPromise[url]=new Promise((resolve,reject)=>{
+   const x=document.createElement('script');x.src=url;x.async=true;
+   let finished=false;
+   const finish=(error)=>{if(finished)return;finished=true;clearTimeout(timer);if(error){x.remove();delete libPromise[url];reject(error);}else resolve();};
+   const timer=setTimeout(()=>finish(Error('외부 PDF 읽기 프로그램 접속 시간이 초과됐어요.')),5500);
+   x.onload=()=>finish(check()?null:Error('PDF 읽기 프로그램을 시작하지 못했어요.'));
+   x.onerror=()=>finish(Error('학교 네트워크에서 PDF 읽기 프로그램 접속이 차단됐을 수 있어요.'));
+   document.head.append(x);
+ });
+ return libPromise[url];
+}
+// 2026-10-16 hotfix: PDF/OCR 초기화 함수 누락 수정.
+// 첨부파일은 서버로 업로드되지 않으며, PDF.js만 필요할 때 CDN에서 읽어옵니다.
+let ocrWorker=null;
+async function ensurePDF(){
+  if(window.pdfjsLib && typeof window.pdfjsLib.getDocument==='function'){
+    if(!window.pdfjsLib.GlobalWorkerOptions.workerSrc){
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDF_ENDPOINTS[0].worker;
+    }
+    return;
+  }
+  setReaderStatus('📦 PDF 분석 기능을 준비하고 있습니다. 인터넷 연결이 필요하며 처음 한 번은 시간이 걸릴 수 있어요.');
+  const attempts=[];
+  for(const site of PDF_ENDPOINTS){
+    try{
+      await loadScript(site.js,()=>!!window.pdfjsLib && typeof window.pdfjsLib.getDocument==='function');
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc=site.worker;
+      return;
+    }catch(error){attempts.push(error.message||String(error));}
+  }
+  throw new Error('PDF 읽기 프로그램을 가져오지 못했습니다. 인터넷 접속 또는 학교 보안망의 CDN 차단 여부를 확인해주세요. 이 경우 「AI 정밀 분석 요청문 복사」를 사용해 원본 PDF를 익숙한 AI에 직접 첨부할 수 있습니다.');
+}
+async function ensureOCR(){
+  if(window.Tesseract && typeof window.Tesseract.createWorker==='function')return;
+  setReaderStatus('📦 사진 속 글자를 읽는 프로그램을 준비하고 있어요. 인터넷 연결이 필요합니다.');
+  try{await loadScript(OCR_LIB,()=>!!window.Tesseract && typeof window.Tesseract.createWorker==='function');}
+  catch(e){throw new Error('사진·스캔 PDF의 한글 OCR 프로그램에 연결하지 못했습니다. 인터넷 연결을 확인하거나 「AI 정밀 분석 요청문 복사」를 이용해주세요.');}
+}
+// 첨부된 파일은 점선 박스 안에서 눈에 띄게 확인하고, 개별적으로 제거할 수 있습니다.
+let filePreviewUrls=[];
+function clearFilePreviewUrls(){filePreviewUrls.forEach(u=>URL.revokeObjectURL(u));filePreviewUrls=[];}
+function renderSelectedFiles(){
+ const has=sourceFiles.length>0;
+ $('uploadDrop').classList.toggle('hasFiles',has);
+ $('uploadSelected').hidden=!has;
+ $('uploadSelectedCount').textContent=`${sourceFiles.length} / 5개`;
+ $('uploadPickTitle').textContent=has?'다른 PDF · 사진 추가하기':'PDF · 교과서 사진 선택하기';
+ $('uploadPickHelp').textContent=has?'지금 첨부한 파일이 아래에 표시돼요 · 최대 5개':'PDF · PNG · JPG · WEBP · TXT / 최대 5개, 파일당 30MB 이하';
+ $('readFiles').disabled=!has||readerBusy;
+ clearFilePreviewUrls();
+ const grid=$('uploadFileGrid');grid.replaceChildren();
+ sourceFiles.forEach((f,i)=>{
+   const card=document.createElement('div');card.className='uploadFileCard';
+   const thumb=document.createElement('div');thumb.className='uploadFileThumb';
+   const ext=(f.name.split('.').pop()||'').toLowerCase();
+   if(/^(png|jpg|jpeg|webp)$/.test(ext)){
+      thumb.classList.add('image');const img=document.createElement('img');
+      const u=URL.createObjectURL(f);filePreviewUrls.push(u);img.src=u;img.alt='첨부 이미지 미리보기';thumb.appendChild(img);
+   }else if(ext==='pdf'){thumb.classList.add('pdf');thumb.textContent='PDF';}
+   else {thumb.classList.add('txt');thumb.textContent='TXT';}
+   const info=document.createElement('div');info.className='uploadFileInfo';
+   const name=document.createElement('span');name.className='uploadFileName';name.textContent=f.name;
+   const meta=document.createElement('span');meta.className='uploadFileMeta';meta.textContent=`${ext.toUpperCase()} · ${(f.size/1048576).toFixed(2)} MB · 첨부 완료`;
+   info.append(name,meta);
+   const remove=document.createElement('button');remove.type='button';remove.className='uploadFileRemove';remove.textContent='×';remove.title=f.name+' 삭제';remove.setAttribute('aria-label',f.name+' 첨부 목록에서 삭제');remove.disabled=readerBusy;
+   remove.addEventListener('click',()=>{
+      if(readerBusy)return;
+      sourceFiles.splice(i,1);$('sourceFiles').value='';
+      extractedRaw='';$('textReview').style.display='none';renderSelectedFiles();
+      setReaderStatus(sourceFiles.length?`✅ ${sourceFiles.length}개 파일이 남았어요. 내용이 바뀌었으니 핵심 내용을 다시 추출해주세요.`:'📎 첨부 파일이 없습니다. 위에서 PDF 또는 사진을 선택해주세요.',sourceFiles.length?'good':'');
+   });
+   card.append(thumb,info,remove);grid.appendChild(card);
+ });
+}
+function selectFiles(files){
+ if(readerBusy)return;
+ const incoming=Array.from(files||[]);
+ if(!incoming.length)return;
+ let rejected=0,duplicates=0,overflow=0,added=0;
+ for(const f of incoming){
+    if(f.size>30*1024*1024||!/\.(pdf|png|jpe?g|webp|txt|md)$/i.test(f.name)){rejected++;continue;}
+    if(sourceFiles.some(x=>x.name===f.name&&x.size===f.size&&x.lastModified===f.lastModified)){duplicates++;continue;}
+    if(sourceFiles.length>=5){overflow++;continue;}
+    sourceFiles.push(f);added++;
+ }
+ $('sourceFiles').value=''; // 같은 파일을 다시 골라도 change 이벤트가 발생하도록
+ renderSelectedFiles();
+ if(added){
+   $('textReview').style.display='none';extractedRaw='';$('uploadProgress').style.display='none';
+ }
+ const extra=[rejected&&`형식·용량 불일치 ${rejected}개 제외`,duplicates&&`중복 ${duplicates}개 제외`,overflow&&`5개 제한으로 ${overflow}개 제외`].filter(Boolean).join(' · ');
+ if(sourceFiles.length){setReaderStatus(`✅ 첨부 완료! ${sourceFiles.length}개 파일이 위 박스에 표시됐어요. 「핵심 내용 추출하기」를 눌러주세요.${extra?' ('+extra+')':''}`,rejected||overflow?'fail':'good');}
+ else {setReaderStatus('⚠️ PDF·JPG·PNG·WEBP·TXT·MD만 지원하며 파일당 30MB 이하로 선택해주세요.','fail');}
+}
+function cleanText(t){return t.replace(/\u0000/g,'').replace(/\r/g,'\n').replace(/\u00a0/g,' ').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n').trim();}
+function cleanLine(s){return s.replace(/^[\s•·\-]+/,'').replace(/\|?\s*(?:그림|표)\s*[ⅢⅠⅡIVXivx0-9\-\s]+\|?/g,' ').replace(/\s+([,.!?。])/g,'$1').replace(/\s+/g,' ').trim();}
+function scoreLine(s){
+  if(s.length<28||s.length>380)return -100;
+  if(!/[.!?。]$/.test(s))return -90;
+  let score=Math.min(170,s.length)/45;
+  if(/(은|는|에서|과정|의미|역할|작용|특징|원리|구성|발생|변화|비교|관계|조건|에너지|합성|반응|생성|이용|필요|달라|때문)/.test(s))score+=3;
+  if(/(설명할 수 있다|구분할 수 있다|이해할 수 있다)/.test(s))score-=0.7;
+  if(/(본 자료|페이지|출처|저작권|학습 목표|연습문제|문제 해결)/.test(s))score-=3;
+  if(/[|◼■□▶▣]/.test(s))score-=2;
+  return score;
+}
+function keywordsFromText(t){
+  // 간단한 무API 키워드 선별. 조사/서술어를 최대한 제거하고 교사가 최종 교정한다.
+  const stop=new Set(['세부','해당','과정','그리고','하지만','때문','같이','그림','설명','수업','학생','있다','된다','한다','사용','따라','에서','통해','구분','생성','경우','내용','이러한','결과','단계','제시','다양한','부분','관련','교과서','여러','대한','이와','함께','이것','것','것은','수','같은','위해','필요','이루어져','나타난다','확인','정의','하나','모두','먼저','다음','자신','분자','분자가','분자를','위치','전체','정도','반드시','첫째','둘째','역할','설정','문장','내용을','부분을','중심','계속','수준','가지','각각','학생들','자료','단원','첫','다른','여기','그런','어떤','정답','비교','통하여','구분할','문제를','분자의','과정을','인산기가','인산기의','일부','나머지','단계에서','기능을','이용하여']);
+  const text=t.replace(/\|\s*(?:그림|표)[^|]*\|/g,' ').replace(/\[[^\]]{1,100}\]/g,' ');
+  const words=(text.match(/[가-힣A-Za-z][가-힣A-Za-z0-9+·-]{1,22}/g)||[]);
+  const normalized=[];
+  for(const word of words){
+    let w=word.replace(/(으로부터|들에게|에서의|으로서|에서|에게|에는|에서는|으로|들이|들을|들과|의|은|는|이|가|을|를|에|과|와|도|로)$/,'');
+    if(w.length<2||stop.has(w)||/(?:하려고|할수|있었다|생성된다|일어난다|이루어진다|수있다|위한|이지만|따라서|통해서|수있을|나타내며)$/.test(w))continue;
+    normalized.push(w);
+  }
+  const count=new Map();for(const w of normalized)count.set(w,(count.get(w)||0)+1);
+  const candidatePhrases=[];
+  for(const match of text.matchAll(/([가-힣A-Za-z][가-힣A-Za-z0-9+·-]{1,14})\s+([가-힣A-Za-z][가-힣A-Za-z0-9+·-]{1,14})/g)){
+    const a=match[1],b=match[2];
+    if((/(?:적|성|분해|지속|수준|기질)$/.test(a)||/(?:인산화|회로|과정|반응|전달계|효소|함수|사건|기법|원리|효과|구조)$/.test(b))&&!stop.has(a))candidatePhrases.push(a+' '+b);
+  }
+  for(const pair of candidatePhrases)count.set(pair,(count.get(pair)||0)+2.5);
+  const ranked=[...count.entries()].sort((a,b)=>b[1]-a[1]).map(([w])=>w);
+  const chosen=[];
+  for(const w of ranked){if(chosen.some(z=>z!==w&&(z.includes(w)||w.includes(z))&&w.length<z.length))continue;chosen.push(w);if(chosen.length===10)break;}
+  return chosen.join(', ');
+}
+// 교육과정의 개념 이해·탐구·적용 관점으로 문장 후보를 분류하여 하나의 칸에 정리합니다.
+// 의미를 이해하는 생성형 AI가 아닌, 브라우저 내부 규칙 기반 문장 선별입니다.
+
+// 광고성 표현 없이, 공개된 규칙으로 과목·학습 대상을 추정하고 교사가 검토하게 합니다.
+// 과목명·단원명·학습 대상은 교사가 먼저 입력하고 확정합니다.
+// 과목 추정(특정 과학 단원에 편향된 키워드 방식)은 사용하지 않습니다.
+function isDiagramNoise(line){
+ // PDF에 포함된 전자/도식/축 눈금이 일반 문장에 뒤섞이는 사례 제외
+ if(/(?:\b[A-Z]\s+[eExXY]\s+){2,}|(?:\b[XYZ]\b[\s,]*){4,}|\b[XYZ]\b(?:\s+[eE]){2,}/.test(line))return true;
+ const singles=(line.match(/(?:^|\s)[a-zA-Z](?=\s|$)/g)||[]).length;
+ if(singles>=4)return true;
+ if(/[ⅠⅡⅢⅣX]{4,}/.test(line)||/[|{}=><]{5,}/.test(line))return true;
+ return false;
+}
+function similarityTrigram(a,b){
+ const normalized=s=>s.replace(/[^가-힣A-Za-z0-9]/g,'');a=normalized(a);b=normalized(b);
+ if(a===b)return 1;if(!a||!b)return 0;
+ if((a.includes(b)||b.includes(a))&&Math.min(a.length,b.length)>28)return .92;
+ const gram=s=>new Set(Array.from({length:Math.max(0,s.length-2)},(_,i)=>s.slice(i,i+3)));
+ const aa=gram(a),bb=gram(b);let intersection=0;for(const x of aa)if(bb.has(x))intersection++;
+ return 2*intersection/(aa.size+bb.size||1);
+}
+function setupRecommendations(){
+ $('recommendGenre').addEventListener('click',recommendGenres);
+}
+function recommendGenres(){
+ const content=(value('subject')+' '+value('unit')+' '+value('keyLearning')+' '+extractedRaw.slice(0,3500)).toLowerCase();
+ if(!content.trim()){ $('recommendResult').innerHTML='<span class="softtitle">먼저 과목·단원·대상을 입력하고 핵심 내용을 추출하거나 직접 작성해 주세요.</span>';return;}
+ const rules=[
+  {id:'sim',re:/실험|변인|온도|농도|산도|ph|반응속도|속도 변화|원인|조건에 따라|효소|세포호흡|광합성|생태계/,reason:'조건을 바꾸며 변화를 관찰하기 좋아요'},
+  {id:'graph',re:/함수|그래프|좌표|증가|감소|함수식|수치|추세|비교|통계/,reason:'수치·관계를 눈으로 확인하기 좋아요'},
+  {id:'sequence',re:/단계|순서|과정|시대|역사적 흐름|인과|해당 과정|분류/,reason:'순서와 연결 관계를 익히기 좋아요'},
+  {id:'escape',re:/원리|개념|정의|추리|단서|비유|작품|암호/,reason:'개념을 단서로 삼아 문제를 풀 수 있어요'},
+  {id:'novel',re:/상황|갈등|서사|등장인물|인물|선택|대화|문학|관계|가치/,reason:'인물과 대화하면서 배울 수 있어요'},
+  {id:'decision',re:/윤리|정책|경제|선택|기회비용|환경|논쟁|갈등/,reason:'선택의 결과를 비교하기 좋아요'},
+  {id:'cards',re:/용어|개념|정의|어휘|단어|명칭|구성 요소/,reason:'개념과 설명을 짝지어 기억할 수 있어요'},
+  {id:'map',re:/지리|지도|지역|지형|분포|국가|세계|기후/,reason:'장소와 공간의 관계를 탐색하기 좋아요'},
+  {id:'quiz',re:/[\s\S]/,reason:'모든 교과에서 시작하기 쉬운 기본형이에요'}
+ ];
+ const matches=rules.map((r,i)=>({id:r.id,score:r.id==='quiz'?1:(content.match(new RegExp(r.re.source,'gi'))||[]).length*2,reason:r.reason}));
+ matches.sort((a,b)=>b.score-a.score);
+ const picks=matches.filter(m=>m.score>0).slice(0,3);
+ if(picks.length<3){for(const r of [{id:'quiz',reason:'빠르게 개념 점검을 할 수 있어요'},{id:'story',reason:'선택하는 활동을 재미있게 구성할 수 있어요'},{id:'cards',reason:'핵심 용어와 설명을 연결하기 좋아요'}])if(!picks.some(p=>p.id===r.id)&&picks.length<3)picks.push(r)}
+ $('recommendResult').innerHTML='<div class="recommendGrid">'+picks.map((x,i)=>{
+  const g=genres.find(y=>y.id===x.id);return `<button type="button" class="recommendCard" data-rec="${x.id}"><span>${i===0?'1순위 제안':'추천 후보'}</span><strong>${g.icon} ${escapeHTML(g.name)}</strong><small>${escapeHTML(x.reason)}</small></button>`;
+ }).join('')+'</div><p class="hintsmall">🤖 추천은 현재 학습 내용의 키워드 조합을 분석하는 방식이며, 생성형 AI가 답변한 결과는 아닙니다. 마음에 드는 장르를 선택해 주세요.</p>';
+ $('recommendResult').querySelectorAll('[data-rec]').forEach(btn=>btn.addEventListener('click',()=>{selected=btn.dataset.rec;filter='전체';drawFilters();drawGenres();update();toast('🎮 '+genres.find(g=>g.id===selected).name+' 장르를 선택했어요!');}));
+}
+
+
+function recommendFeatures(){
+ const g=genres.find(x=>x.id===selected);
+ const content=(value('unit')+' '+value('keyLearning')).trim();
+ const unit=value('unit')||'해당 단원';
+ const special=/세포호흡|피루브산|TCA|인산화/.test(content)?'세포호흡의 단계·장소·ATP 합성 방식':
+     /이차함수|그래프|함수/.test(content)?'함수의 그래프와 계수의 관계':
+     /시대|조선|역사|사건/.test(content)?'주요 사건의 순서와 원인':
+     /문학|작품|인물|시/.test(content)?'작품의 내용과 인물의 선택':
+     '교사가 확인한 핵심 개념';
+ const base={
+  quiz:[`학생이 ${unit} 관련 객관식 3~5문제를 풀면 정답과 이유를 바로 확인하도록 해줘.`,`틀린 문제를 다시 풀고, 정답률과 오개념 설명을 마지막에 보여줘.`,`문항마다 힌트를 1회 제공하고 최종 점수와 다시 풀기 버튼을 넣어줘.`],
+  ox:[`학생이 ${special}에 관한 O/X 문제를 한 개씩 풀도록 해줘.`,`틀린 판단은 근거 설명과 함께 바로 수정하도록 유도해줘.`,`마지막에 맞힌 문제 수와 틀린 문제 다시 보기 기능을 넣어줘.`],
+  cards:[`학생이 ${special}에 관한 개념 카드와 설명 카드를 뒤집어 짝짓도록 해줘.`,`맞힌 카드는 고정하고, 틀리면 잠시 후 다시 뒤집히도록 해줘.`,`시도 횟수·진행률·전체 완료 화면을 보여줘.`],
+  sequence:[`학생이 ${unit}의 주요 단계를 순서대로 배치하고 이유를 확인하게 해줘.`,`위아래 버튼으로 카드를 이동한 뒤 정답을 확인하게 해줘.`,`틀린 순서는 정답을 바로 공개하지 않고 단계별 힌트를 보여줘.`],
+  novel:[`등장인물 2명이 ${special}을 주제로 대화하고, 학생의 선택에 따라 이야기와 신뢰도가 달라지게 해줘.`,`학생의 선택이 수업 내용 이해와 연결되도록 분기 3개와 결말 2개를 만들어줘.`,`각 엔딩에서 어떤 선택이 왜 적절했는지 교육적인 해설을 보여줘.`],
+  story:[`학생이 ${unit}에 관한 선택형 이야기 4장면을 진행하게 해줘.`,`학생이 선택한 행동이 다음 장면과 최종 결과에 반영되도록 해줘.`,`엔딩마다 관련 개념 해설과 다시하기 버튼을 보여줘.`],
+  escape:[`학생이 ${unit} 핵심 개념을 활용해 잠금장치 3개를 순서대로 풀도록 해줘.`,`문제를 틀리면 단계별 힌트 2개를 제시하고 풀린 단계는 저장해줘.`,`모든 암호를 해결하면 탈출 성공 화면과 개념 정리 카드가 나오게 해줘.`],
+  mystery:[`학생이 ${unit}에 관한 증거 카드 4개를 살펴보고 논리적으로 결론을 선택하게 해줘.`,`증거를 클릭하면 설명을 보여주고 수집 여부를 표시해줘.`,`최종 판단에 대한 근거 비교와 오개념 해설을 제공해줘.`],
+  rpg:[`학생이 ${unit} 관련 미션 3개를 해결하며 경험치를 쌓는 미니 RPG로 만들어줘.`,`퀘스트를 완료할 때 다음 지역이 열리고 캐릭터 상태가 바뀌게 해줘.`,`마지막 보스 퀘스트에서 배운 개념을 종합하여 적용하게 해줘.`],
+  sim:[`학생이 ${special}을 직접 선택·변경하여 결과를 비교하게 해줘. 근거가 없는 수치 그래프는 만들지 마.`,`조건을 바꿨을 때 결과가 어떻게 달라지는지 교육용 정성 모형으로 보여주고 근거를 설명해줘.`,`실험 전 예측 선택 → 조작 → 결과 비교 → 해석 질문 순서로 진행하게 해줘.`],
+  graph:[`학생이 ${unit}의 입력값을 슬라이더로 바꾸며 그래프·표의 변화를 보게 해줘.`,`축·범례·단위를 명확하게 표시하고 변화 전후를 비교하게 해줘.`,`정확한 식이 제공되지 않았다면 임의 수치를 실제 데이터처럼 표현하지 말고 교육용 예시임을 표시해줘.`],
+  tycoon:[`학생이 ${unit}과 관련된 가상 자원을 배분하며 5턴을 진행하도록 해줘.`,`선택에 따라 자원과 성과 지표가 변하고 이유가 표시되게 해줘.`,`마지막에 전략의 장단점과 교과 개념 연결 피드백을 보여줘.`]
+ };
+ const fallback=[
+  `학생이 ${unit}의 핵심 개념을 선택하고 즉시 피드백을 받을 수 있는 상호작용을 만들어줘.`,
+  `단계별 진행도와 힌트 버튼, 재도전 기능을 넣어줘.`,
+  `활동이 끝나면 이해한 내용과 보완할 부분을 요약해줘.`
+ ];
+ const list=base[g.id]||fallback;
+ $('featureRecs').innerHTML='<div class="featureRecsIntro">💡 아래는 <b>'+escapeHTML(g.name)+'</b>에 맞춘 기능 아이디어예요. 선택하면 입력칸에 반영됩니다.</div>'+list.map((x,i)=>'<button class="featureRec" type="button" data-i="'+i+'"><b>'+String(i+1)+'</b><span>'+escapeHTML(x)+'</span></button>').join('')+'<div class="hintsmall">※ API 없는 자동 추천입니다. 문구는 자유롭게 고칠 수 있어요.</div>';
+ $('featureRecs').querySelectorAll('[data-i]').forEach(btn=>btn.addEventListener('click',()=>{
+  const text=list[Number(btn.dataset.i)];
+  const existing=value('features');
+  if(existing && existing!==text && !confirm('현재 작성한 기능을 추천 문구로 바꾸시겠어요? 취소하면 기존 내용이 유지됩니다.'))return;
+  $('features').value=text;update();toast('✨ 기능 추천을 적용했어요!');
+ }));
+}
+
+function curriculumFocus(raw, courseTitle){
+ const cleaned=cleanText(raw)
+   .replace(/\[(?:\d+쪽|[^\]\n]{1,80}\.pdf)\]/g,' ')
+   .replace(/\|\s*(?:그림|표)\s*[ⅢⅠⅡIVXivx0-9\-\s]+\|/g,' ')
+   .replace(/\(참고: 총[^)]*\)/g,' ')
+   .replace(/\s*\|\s*/g,' ');
+ // PDF 개행은 실제 문장 끝이 아닐 수 있어 문단 안의 줄바꿈을 이어줍니다.
+ // 단, 새 페이지나 불릿이 등장하면 분리해 서로 다른 문장을 임의로 섞지 않습니다.
+ const paras=[];let paragraph='';
+ const finish=()=>{if(paragraph.trim())paras.push(paragraph.trim());paragraph='';};
+ for(const rawLine of cleaned.split(/\n/)){
+  const line=cleanLine(rawLine);if(!line){finish();continue;}
+  if(line===value('unit')||line===value('subject')){finish();continue;} // 단독 제목이 본문과 합쳐지는 오류 방지
+  if(/^\[|^\(참고:|^\d+\s*(쪽|페이지)/.test(line)){finish();continue;}
+  if(/^[•·▶■□-]/.test(rawLine.trim()))finish();
+  if(/^(?:학습 목표|생각해 보기|탐구 활동|자료 출처|그림|표)\b/.test(line)){finish();continue;}
+  paragraph+=(paragraph?' ':'')+line;
+  if(/[.!?。]$/.test(line))finish();
+ }
+ finish();
+ const clauses=[];
+ for(let p=0;p<paras.length;p++){
+  const bits=paras[p].split(/(?<=[.!?。])\s+(?=[가-힣A-Za-z0-9])/);
+  for(const piece of bits){
+   let line=piece.replace(/\s+([,.!?。])/g,'$1').trim();
+   if(line.length<32||line.length>270||!/[.!?。]$/.test(line)||isDiagramNoise(line))continue;
+   if(/^(?:해설|정답|학습 목표|단원|그림|표)/.test(line)||/(?:출처|저작권|참고 문헌|쪽에 제시)/.test(line))continue;
+   const conceptual=/(?:뜻한다|의미한다|말한다|라고 한다|이다\.|이다|구성|특징|역할|종류|개념|정의|구분)/.test(line);
+   const relational=/(?:때문|따라|영향|차이|비교|전환|에너지|변화|과정|반응|생성|전달|감소|증가|결합|분해|산화|환원)/.test(line);
+   const inquiry=/(?:관찰|탐구|실험|그래프|조절|예측|분석|해석|자료|생활|활용|문제 해결)/.test(line);
+   const tag=conceptual?'개념 이해':(relational?'원리·관계':(inquiry?'탐구·적용':'핵심 설명'));
+   let score=(conceptual?3:0)+(relational?2.5:0)+(inquiry?2:0);
+   score+=Math.min(2,line.length/95);
+   const words=(courseTitle||'').split(/[\s\-·,]+/).filter(w=>w.length>=2&&!['고등학교','과학','수학','국어','사회','통합','생명','단원'].includes(w));
+   if(words.some(w=>line.includes(w)))score+=4;
+   if(/그림\s*[0-9ⅢⅠⅡ]/.test(line))score-=3;
+   if(/(?:설명할 수 있다|구분할 수 있다|이해할 수 있다)/.test(line))score-=3;
+   if(/\b(?:1\s*분자|2\s*분자|\d+\s*%)/.test(line)&&!/\.|이다|한다/.test(line))score-=2;
+   clauses.push({line,tag,score,order:p});
+  }
+ }
+ clauses.sort((a,b)=>b.score-a.score);
+ const selected=[];const seen=[];
+ for(const x of clauses){
+  const normalized=x.line.replace(/[^가-힣a-zA-Z0-9]/g,'');
+  if(seen.some(y=>y===normalized||similarityTrigram(x.line,y)>=0.72))continue;
+  selected.push(x);seen.push(x.line);if(selected.length>=5)break;
+ }
+ selected.sort((a,b)=>a.order-b.order);
+ if(selected.length===0){
+  const rawWords=keywordsFromText(raw).split(', ').filter(Boolean).slice(0,7);
+  return rawWords.length?'[핵심 개념 후보] '+rawWords.join(', ')+'\n※ 완결된 문장이 부족하여 개념 후보만 추출했습니다. PDF 원문을 확인하거나 AI 정밀 분석을 사용해 주세요.':'';
+ }
+ const result=selected.map(x=>'• ['+x.tag+'] '+x.line).join('\n');
+ return result;
+}
+async function getOCR(){if(ocrWorker)return ocrWorker;await ensureOCR();setReaderStatus('🗣️ 한글 문자 인식 모델을 준비하는 중이에요. 첫 사용 시 시간이 걸릴 수 있어요.');ocrWorker=await window.Tesseract.createWorker('kor+eng',1,{logger:m=>{if(m.status==='recognizing text'&&m.progress!==undefined)setProgress(35+Math.round(m.progress*55));}});return ocrWorker;}
+async function readImageOCR(img){const w=await getOCR();const res=await w.recognize(img);return res.data.text||'';}
+async function readPdfText(file){
+ await ensurePDF();
+ const bytes=await file.arrayBuffer();let pdf;
+ try{pdf=await window.pdfjsLib.getDocument({data:new Uint8Array(bytes),useSystemFonts:true}).promise;}
+ catch(e){throw Error('PDF를 열 수 없어요. 암호가 걸려 있거나 형식이 지원되지 않을 수 있어요.');}
+ try{
+   const requestedStart=$('pageStart').value.trim();
+   const requestedEnd=$('pageEnd').value.trim();
+   const start=requestedStart?Number(requestedStart):1;
+   const end=requestedEnd?Number(requestedEnd):pdf.numPages;
+   if(!Number.isInteger(start)||!Number.isInteger(end)||start<1||end<start){
+     throw Error('페이지 범위가 올바르지 않아요. 시작 쪽과 마지막 쪽을 확인해 주세요.');
+   }
+   if(start>pdf.numPages){
+     throw Error(`이 PDF는 ${pdf.numPages}쪽까지 있어요. 시작 쪽을 다시 입력해 주세요.`);
+   }
+   const last=Math.min(end,pdf.numPages);
+   const total=last-start+1;
+   if(total>=60 && !confirm(`선택한 PDF가 ${total}쪽입니다. 전체 분석에 시간이 오래 걸릴 수 있어요. 계속하시겠어요? (취소한 뒤 '필요한 쪽만 분석'에서 범위를 지정할 수 있습니다.)`)){
+     throw Error('분석을 취소했습니다. 필요하면 페이지 범위를 좁혀 다시 시도해 주세요.');
+   }
+   const texts=[];
+   for(let p=start;p<=last;p++){
+     setReaderStatus(`📄 PDF ${p}/${pdf.numPages}쪽 처리 중 (선택 범위 ${p-start+1}/${total})...`);
+     setProgress(10+60*(p-start)/total);
+     const page=await pdf.getPage(p);
+     try{
+       const tc=await page.getTextContent();let line='',lastY=null;
+       for(const item of tc.items){
+         if(!item.str)continue;
+         const y=item.transform?item.transform[5]:null;
+         if(lastY!==null&&y!==null&&Math.abs(y-lastY)>3.5){line+='\n';}
+         else if(line&&!/\s$/.test(line)&&!/^\s/.test(item.str)){line+=' ';}
+         line+=item.str;lastY=y;
+       }
+       let t=cleanText(line);
+       if(t.replace(/\s/g,'').length<45){
+         setReaderStatus(`🔍 PDF ${p}쪽은 스캔 자료로 보여 문자 인식을 시도합니다...`);
+         const viewport=page.getViewport({scale:1.7});
+         const canvas=document.createElement('canvas');
+         canvas.width=Math.ceil(viewport.width);canvas.height=Math.ceil(viewport.height);
+         const context=canvas.getContext('2d');
+         try{
+           await page.render({canvasContext:context,viewport}).promise;
+           try{const ocr=await readImageOCR(canvas);if(ocr.trim().length>t.length)t=ocr;}
+           catch(ocrError){if(!t.trim())throw Error('스캔 PDF의 글자를 인식하지 못했습니다. PDF를 AI에 직접 첨부해 분석할 수도 있습니다.');}
+         }finally{canvas.width=0;canvas.height=0;}
+       }
+       texts.push(`[${p}쪽]\n${t}`);
+     }finally{if(typeof page.cleanup==='function')page.cleanup();}
+     // 큰 PDF에서도 화면의 분석 진행률이 업데이트되도록 합니다.
+     if((p-start+1)%5===0)await new Promise(resolve=>setTimeout(resolve,0));
+   }
+   if(last<end)texts.push(`(참고: PDF의 마지막 페이지는 ${pdf.numPages}쪽입니다.)`);
+   return texts.join('\n\n');
+ }finally{try{await pdf.destroy();}catch(e){}}
+}
+async function processDocuments(){
+ if(readerBusy||!sourceFiles.length)return;
+ const missing=[['subject','과목명'],['unit','단원명'],['grade','학습 대상']].filter(([id])=>!value(id));
+ if(missing.length){
+   setReaderStatus('⚠️ 먼저 '+missing.map(x=>x[1]).join('·')+'을(를) 입력해 주세요. 이 정보를 기준으로 교과서를 분석합니다.','fail');
+   $(missing[0][0]).focus();return;
+ }
+ readerBusy=true;$('readFiles').disabled=true;setProgress(4);$('textReview').style.display='none';const texts=[],errors=[];
+ try{
+   for(let i=0;i<sourceFiles.length;i++){
+     const f=sourceFiles[i];setReaderStatus(`🔎 ${i+1}/${sourceFiles.length}: ${f.name} 글자 읽는 중...`);
+     try{
+       let txt='';if(/\.pdf$/i.test(f.name))txt=await readPdfText(f);
+       else if(/\.(png|jpg|jpeg|webp)$/i.test(f.name))txt=await readImageOCR(f);
+       else txt=await f.text();
+       if(txt.trim().length<18)errors.push(f.name+': 읽을 수 있는 글자가 거의 없습니다.');
+       else texts.push('['+f.name+']\n'+txt);
+     }catch(e){errors.push(f.name+': '+e.message);}
+   }
+   extractedRaw=texts.join('\n\n');if(!extractedRaw)throw Error(errors.join(' / ')||'추출된 글자가 없습니다.');
+   const context=[value('subject'),value('unit'),value('grade')].join(' ');
+   const summary=curriculumFocus(extractedRaw,context);
+   $('inferenceResult').className='inferenceBox good';
+   $('inferenceResult').textContent='✅ 분석 기준: '+value('subject')+' / '+value('unit')+' / '+value('grade')+' — 교사가 입력한 수업 정보는 변경되지 않았습니다.';
+   $('rawExtract').textContent=extractedRaw;$('textReview').style.display='block';$('rawExtract').style.display='none';
+   if(summary){
+     const existing=value('keyLearning');
+     if(existing && !confirm('기존에 작성한 수업 핵심 내용을 새 추출 결과로 바꾸시겠어요? 취소하면 기존 내용을 유지합니다.')){
+       setReaderStatus('✅ 파일에서 핵심 내용 후보를 찾았습니다. 기존 수업 핵심 내용은 유지했습니다.','good');
+     }else{
+       $('keyLearning').value=summary;
+       setReaderStatus('✅ '+texts.length+'개 파일을 읽고 '+value('unit')+' 단원의 핵심 문장 후보를 채웠어요. 교과 내용·수치·도식을 확인한 뒤 앱 장르를 선택하세요.','good');
+     }
+   }else{
+     setReaderStatus('⚠️ 문장으로 정리할 수 있는 핵심 내용을 찾지 못했습니다. 원문이나 AI 정밀 분석을 이용해 핵심 내용 칸을 보완하세요.','fail');
+   }
+   documentSourceNote='교사가 지정한 과목·단원·학습 대상을 바탕으로 첨부 자료에서 문장을 선별한 검토용 초안입니다. 공식 교육과정 원문과 대조한 결과는 아닙니다.';
+   update();setProgress(100);toast('📚 수업 범위에 맞춰 문장 후보를 추렸어요!');
+   if(errors.length)setReaderStatus($('uploadStatus').textContent+' 일부 파일 오류: '+errors.join(' / '),'fail');
+ }catch(e){setReaderStatus('⚠️ 문자 분석에 실패했습니다. '+e.message+' AI 정밀 분석 요청문을 복사하고 같은 PDF를 AI에 첨부하는 방법도 있습니다.','fail');setProgress(0);}
+ finally{readerBusy=false;$('readFiles').disabled=!sourceFiles.length;setTimeout(()=>{$('uploadProgress').style.display='none';},1400);if(ocrWorker){try{await ocrWorker.terminate();}catch(e){}ocrWorker=null;}}
+}
+function makeAIAnalysisPrompt(){const g=genres.find(x=>x.id===selected);return `당신은 2022 개정 교육과정의 개념 이해·탐구·적용 취지에 맞게 교과서 자료를 분석하는 교사 보조 AI입니다. 다음 메시지에 교과서 PDF나 사진을 첨부하겠습니다.\n\n[수업 정보]\n- 교사가 입력한 과목: ${value('subject')||'(미정)'}\n- 교사가 입력한 단원: ${value('unit')||'(미정)'}\n- 대상: ${value('grade')||'학습 대상 확인 필요'}\n- 만들 앱: ${g.name}\n\n[요청]\n1. 위에서 교사가 확정한 과목·단원·학습 대상을 변경하거나 다른 과목으로 추측하지 마세요. 반드시 실제 첨부 자료를 확인하고, 읽지 못했다면 분석했다고 말하지 마세요.\n2. 학생이 수업 후 반드시 이해할 중요한 개념과 개념 사이의 관계·원리·탐구 요소를 중심으로 핵심 내용 3~6개를 정리하세요.\n3. 정확한 정보만 사용하고 표·그림·수식 등 불분명한 부분은 확인이 필요하다고 표시하세요.\n4. 2022 개정 교육과정의 개념 이해·탐구·문제 해결·실생활 적용을 고려하되, 공식 문서를 직접 확인하지 않았다면 성취기준 코드나 세부 기준을 지어내지 마세요.\n5. 제조기의 '수업 핵심 내용' 칸 하나에 바로 붙여넣을 수 있도록 불릿 3~6개만 출력하세요. (다른 키워드 목록을 따로 만들지 마세요.)\n\n교과서 자료 분석을 시작하세요.`;}
+async function copyAny(s){try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(s);else{const ta=document.createElement('textarea');ta.value=s;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();if(!document.execCommand('copy'))throw Error('copy');ta.remove();}toast('AI 분석 요청문을 복사했어요. 사용 중인 AI에 원본 파일과 함께 붙여넣으세요.');}catch(e){const newTab=window.prompt('복사 권한이 없어요. 아래 내용을 직접 복사하세요.',s);}}
+function setupFileAssistant(){const input=$('sourceFiles');input.addEventListener('change',()=>selectFiles(input.files));$('readFiles').addEventListener('click',processDocuments);
+ $('aiReview').addEventListener('click',()=>copyAny(makeAIAnalysisPrompt()));$('clearFiles').addEventListener('click',()=>{input.value='';sourceFiles=[];extractedRaw='';documentSourceNote='';$('inferenceResult').className='inferenceBox';$('inferenceResult').textContent='✅ 입력한 과목·단원·대상을 기준으로 핵심 문장을 추립니다. 파일을 지워도 수업 정보는 그대로입니다.';$('textReview').style.display='none';renderSelectedFiles();$('readFiles').disabled=true;setReaderStatus('첨부 파일을 지웠어요. 작성한 학습 내용은 유지됩니다.');update();});
+ $('showFullText').addEventListener('click',()=>{$('rawExtract').style.display=$('rawExtract').style.display==='none'?'block':'none';});
+ const drop=$('uploadDrop');drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('drag');});drop.addEventListener('dragleave',()=>drop.classList.remove('drag'));drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('drag');selectFiles(e.dataTransfer.files);});$('readFiles').disabled=true;
+}
+
+
+function setup(){setupFileAssistant();drawFilters();drawGenres();drawAddons();setupRecommendations();$('recommendFeatures').addEventListener('click',recommendFeatures);['subject','unit','grade','keyLearning','features','setting','answer','notes','style','difficulty'].forEach(id=>$(id).addEventListener('input',update));$('generatePrompt').addEventListener('click',generatePrompt);$('copy').addEventListener('click',copyText);$('download').addEventListener('click',downloadText);$('saveLocal').addEventListener('click',()=>{try{localStorage.setItem('hj_prompt_lab',JSON.stringify(getForm()));toast('이 브라우저에 설정을 저장했어요');}catch(e){toast('브라우저 저장이 허용되지 않습니다')}});$('loadLocal').addEventListener('click',()=>{try{const s=localStorage.getItem('hj_prompt_lab');if(!s)return toast('저장된 설정이 없어요');setForm(JSON.parse(s));toast('저장한 설정을 불러왔어요');}catch(e){toast('설정을 불러올 수 없어요')}});$('reset').addEventListener('click',()=>{if(!confirm('현재 작성한 내용을 처음으로 되돌릴까요?'))return;window.location.reload();});$('copy').disabled=true;$('download').disabled=true;update();}
+setup();
+})();</script>
+</body>
+</html>
