@@ -99,6 +99,18 @@ hr{border:0;border-top:1px dashed #e5e3ee;margin:20px 0}.rowfields{display:grid;
 .rangeInputs label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:750}
 .rangeInputs input{width:110px;min-height:35px;padding:6px 9px;border:1px solid #dcd5ef;border-radius:8px;background:#fff;color:#232540}
 .rangeOptions small{color:#77738f;line-height:1.4;display:block}
+
+/* 장르별 조작 선택 */
+.controlSection{margin-top:18px;padding:15px;border:1px solid #e6def6;border-radius:15px;background:linear-gradient(130deg,#faf7ff,#f8fbff)}
+.controlOptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.controlChoice{display:flex;gap:9px;align-items:flex-start;min-width:0;padding:11px 12px;background:#fff;border:1.5px solid #e6e2f1;border-radius:12px;cursor:pointer}
+.controlChoice:has(input:checked){background:#f2edff;border-color:#8667e0;box-shadow:inset 0 0 0 1px #8667e0}
+.controlChoice:focus-within{outline:3px solid rgba(115,86,215,.24);outline-offset:2px}
+.controlChoice input{flex:none;width:16px;height:16px;margin:3px 0 0;accent-color:#7356d7}
+.controlChoice strong{display:block;font-size:12px;line-height:1.45;color:#514d77}
+.controlChoice small{display:block;margin-top:3px;font-size:10.5px;line-height:1.5;color:#827b98}
+.controlHint{margin-top:10px;padding:10px 12px;font-size:11.5px;line-height:1.65;color:#625a83;background:#fff;border:1px solid #ebe7f5;border-radius:10px}
+@media(max-width:680px){.controlOptions{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -168,6 +180,16 @@ hr{border:0;border-top:1px dashed #e5e3ee;margin:20px 0}.rowfields{display:grid;
       <div aria-label="게임 유형 필터" class="genresTop" id="filters" role="group"></div>
       <div class="genres" id="genres"></div>
       <div class="tip"><span>💡</span><span id="genreTip">장르를 선택하면 여기에서 해당 장르의 제작 요령을 알려드려요.</span></div>
+      <div class="controlSection" aria-labelledby="controlTitle">
+        <div class="sectiontitle" id="controlTitle">🕹️ 게임 조작 방식 <span class="softtitle">장르별 선택을 기억해요</span></div>
+        <div class="controlOptions" id="controlOptions" role="radiogroup" aria-label="게임 조작 방식">
+          <label class="controlChoice"><input type="radio" name="controlMode" value="auto" checked><span><strong>🤖 AI 자동 추천 (기본값)</strong><small>선택한 장르에 알맞은 방식 적용</small></span></label>
+          <label class="controlChoice"><input type="radio" name="controlMode" value="click"><span><strong>🖱️ 마우스 클릭·드래그형</strong><small>사물·카드·시설을 직접 클릭하고 조작</small></span></label>
+          <label class="controlChoice"><input type="radio" name="controlMode" value="keyboard"><span><strong>⌨️ 방향키·WASD 이동형</strong><small>캐릭터 이동·장애물·E키 조사</small></span></label>
+          <label class="controlChoice"><input type="radio" name="controlMode" value="hybrid"><span><strong>🎮 키보드 이동 + 마우스형</strong><small>캐릭터 이동과 클릭 상호작용을 함께</small></span></label>
+        </div>
+        <div class="controlHint" id="controlHint" aria-live="polite"></div>
+      </div>
     </div>
   </section>
   <section class="panel" style="margin-top:19px">
@@ -238,6 +260,10 @@ const addonsList=[['hint','힌트'],['feedback','오답 해설'],['progress','�
 // 장르별 추천 선택. 교사의 개별 변경은 장르별로 기억합니다.
 const genreAddonDefaults={"quiz":["hint","feedback","progress","score","restart"],"ox":["feedback","progress","score","restart"],"cards":["progress","score","restart"],"sequence":["hint","feedback","progress","restart"],"novel":["progress","score","save","restart"],"story":["progress","save","restart"],"interview":["hint","progress","save","restart"],"escape":["hint","progress","timer","restart","save"],"mystery":["hint","progress","save","restart"],"rpg":["progress","score","save","restart"],"tycoon":["progress","score","save","restart"],"battle":["progress","score","restart"],"board":["progress","score","restart"],"time":["timer","feedback","progress","score","restart"],"map":["progress","save","restart"],"sim":["progress","save","restart"],"graph":["progress","restart"],"ecosystem":["progress","score","save","restart"],"decision":["feedback","progress","save","restart"]};
 const addonSelectionsByGenre={};
+const controlModeByGenre={};
+const controlModeNames={auto:'AI 자동 추천',click:'마우스 클릭·드래그형',keyboard:'방향키·WASD 캐릭터 이동형',hybrid:'키보드 이동 + 마우스 상호작용형'};
+// 기존 장르 조작 방식을 바탕으로 자동 추천하며, 교사가 어느 장르든 직접 변경할 수 있습니다.
+const controlDefaultByGenre={rpg:'keyboard'};
 const filterList=['전체','기초','스토리','게임','시뮬레이션'];
 let filter='전체',selected='quiz';
 let documentSourceNote='';
@@ -258,8 +284,34 @@ function chooseGenre(id){
   if($('addons').querySelector('input'))addonSelectionsByGenre[selected]=checkedAddonIDs();
   selected=id;
  }
- drawGenres();drawAddons();update();
+ drawGenres();drawAddons();drawControlOptions();update();
 }
+
+function controlMode(){return controlModeNames[controlModeByGenre[selected]]?controlModeByGenre[selected]:'auto';}
+function resolvedControlMode(){return controlMode()==='auto'?(controlDefaultByGenre[selected]||'click'):controlMode();}
+function controlModeSummary(){const mode=controlMode(),resolved=resolvedControlMode();return mode==='auto'?('AI 자동 추천 (현재 장르 권장: '+controlModeNames[resolved]+')'):controlModeNames[mode];}
+function drawControlOptions(){
+ const mode=controlMode(),g=genres.find(x=>x.id===selected),resolved=resolvedControlMode();
+ document.querySelectorAll('input[name="controlMode"]').forEach(input=>{input.checked=input.value===mode;});
+ const recommended=controlDefaultByGenre[selected]||'click';
+ $('controlHint').innerHTML=mode==='auto'
+  ? ('<b>'+escapeHTML(g.name)+'</b>의 기본 추천은 <b>'+escapeHTML(controlModeNames[recommended])+'</b>입니다. 제작 프롬프트에 이 조작 방식을 반영해요. 필요하면 직접 다른 방식을 선택하세요.')
+  : ('<b>'+escapeHTML(g.name)+'</b>에 <b>'+escapeHTML(controlModeNames[resolved])+'</b>을 적용합니다. 이동형은 충돌 처리·사물 조사·조작 안내까지 프롬프트에 추가합니다.');
+}
+function controlModePrompt(){
+ const mode=controlMode(),effective=resolvedControlMode();
+ const descriptions={
+ click:'마우스 클릭·드래그(터치에서는 탭·터치 조작)를 핵심 입력으로 구현하세요. 실제 게임 공간의 사물·시설·카드 등을 직접 선택/이동/조합할 수 있게 하고, 시각적 반응과 상태 변화를 보여주세요. 방향키나 2D 캐릭터 이동을 필수로 추가하지 마세요. 드래그가 있다면 클릭 등 대체 조작도 제공하세요.',
+ keyboard:'방향키(↑↓←→)와 WASD로 2D 캐릭터를 실제로 이동시키세요. 이동 가능 구역과 벽·장애물 충돌 판정, 방향에 따른 동작 또는 이동 애니메이션을 구현하세요. 상호작용 범위 안의 사물·NPC·장치는 E키로 조사·사용하고, 조사 결과·획득한 단서·열린 문 등 게임 상태가 실제 화면에 반영되도록 하세요. 암호 입력 등 텍스트 필드에 포커스된 동안에는 이동 키를 무시하고, 게임 중 방향키가 페이지 스크롤을 일으키지 않도록 처리하세요. 모바일/터치 화면에는 화면 방향 버튼과 조사 버튼을 제공하세요.',
+ hybrid:'방향키(↑↓←→)와 WASD로 2D 캐릭터를 움직이되 벽·장애물 충돌 및 이동 애니메이션을 구현하세요. 동시에 사물·시설·NPC·게임 UI를 마우스로 클릭하거나 터치해 조사·사용할 수 있게 하세요. 캐릭터 가까이 있는 물체에 E키로 상호작용하는 기능도 제공하고, 거리 조건이 필요한 대상은 클릭 조작에도 동일한 거리 규칙을 적용하세요. 텍스트 입력 중에는 게임 이동 단축키가 발동하지 않게 하고, 플레이 중 방향키의 페이지 스크롤을 방지하세요. 모바일에는 화면 방향 버튼을 제공하세요.'
+ };
+ return (mode==='auto'
+  ? 'AI 자동 추천을 선택했습니다. 이 장르의 권장 조작 방식은 '+controlModeNames[effective]+'입니다. 장르 특성과 학습 활동을 고려하되, 별다른 이유가 없다면 이 방식을 기본으로 실제 구현하세요.'
+  : '교사가 '+controlModeNames[effective]+'을(를) 직접 선택했습니다. 이를 단순 안내문이 아니라 실제 게임 입력 및 핵심 플레이에 반드시 반영하세요.')
+  +'\n'+descriptions[effective]
+  +'\n첫 화면과 플레이 화면에서 실제 작동하는 조작 방법을 학생에게 짧고 명확하게 안내하세요. 사용하지 않는 키나 기능은 안내하지 마세요.';
+}
+
 function value(id){return $(id).value.trim();}
 function learningDifficultyText(){
  const m={easy:'쉬움: 기초 개념 이해와 단일 개념 활용',normal:'보통: 개념 간 관계·원리 파악과 적용',hard:'어려움: 자료 해석·추론·복합 상황 해결',expert:'심화: 여러 개념의 통합·전이·전략적 문제 해결',custom:'교사가 정한 세부 난이도 기준'};
@@ -320,8 +372,8 @@ const themeVisualDirection={
   "미니멀 흑백": "흑백 톤을 유지하면서 선 굵기·명암 단계·패턴·음영·움직임으로 풍부한 공간감과 시각적 계층을 만드세요. 단순한 기본 HTML 페이지로 축약하지 마세요."
 };
 const scope={quick:'핵심 기능과 화면 수를 2~3개로 제한하되, 실제 게임 장면·시각적 완성도·주요 상호작용은 생략하지 마세요. 임시 텍스트 UI나 기본 버튼 목록으로 대체하지 마세요.',standard:'완성도와 안정성의 균형을 맞춰. 핵심 화면 3~5개, 학습 피드백, 자연스러운 전환과 기본 오류 처리를 포함해.',advanced:'다단계 콘텐츠와 풍성한 분기·상태 변화, 세련된 반응형 UI, 진행 상태 관리, 주요 예외 처리까지 자세히 구현해. 그래도 외부 의존성은 사용하지 마.'};
-function basicInfo(){const g=genres.find(x=>x.id===selected);return {g,header:`[수업 정보]\n- 과목: ${value('subject')||'과목 미확정 (교사 확인 필요)'}\n- 단원: ${value('unit')||'단원명 미확정 (교사 확인 필요)'}\n- 대상: ${value('grade')||'학습 대상 확인 필요'}\n- 수업 핵심 내용(교사가 지정한 과목·단원 범위에서 추출·검토한 내용):\n${value('keyLearning')||'(핵심 내용 미입력: 학생 대상 설명이나 정답을 임의로 확정하지 말고 필요한 교과 개념을 교사에게 질문하세요)'}${documentSourceNote?"\n- 자료 확인 참고: "+documentSourceNote:""}\n\n[만들 앱의 핵심]\n- 앱 장르: ${g.name} — ${g.summary}\n- 교사가 반드시 원하는 기능: ${value('features')||'선택한 장르만의 실제 조작으로 학습 개념을 활용해 미션을 해결하는 상호작용'}\n- 화면 분위기: ${value('style')}\n- 그래픽 완성도: 모든 테마에서 반드시 고급형(교사 설정 불필요)\n- 학생 학습 난이도(교사 설정): ${learningDifficultyText()}\n- 더할 요소: ${selectedAddons().join(', ')||'없음'}\n\n[선택한 추가 설정]\n${settingBlock()}`};}
-function createPrompt(){const {g,header}=basicInfo();return `당신은 교과 학습을 설계하는 교육 전문가이자, 설치 없이 실행되는 HTML 교육용 앱을 만드는 숙련된 프런트엔드 개발자입니다.\n\n나는 코딩을 거의 모르는 교사입니다. 아래 정보만으로 학생이 실제로 조작할 수 있는 게임형 수업앱을 완성해 주세요. 아이디어 설명만 하지 말고, 바로 실행 가능한 코드를 작성하세요.\n\n${header}\n\n[${g.name} 장르에 맞는 게임 설계 지침]\n${g.mechanics}\n\n[장르 고유의 실제 게임플레이 — 퀴즈화 금지]\n${gamePlayRules[g.id]}\n1. 교과 내용은 정답 해설에만 등장하면 안 됩니다. 학생이 그것을 알아야 게임의 도구·단서·전략·변인·상황을 조작해 목표를 달성하도록 만드세요.\n2. 퀴즈/OX 이외의 장르는 객관식·OX를 주된 진행 방식으로 사용하지 말고 선택한 장르의 고유한 상호작용을 중심으로 구현하세요.\n3. 모든 스테이지·미션은 실제로 서로 다른 사고나 조작을 요구해야 하며, 항상 같은 정답·무작위 클릭으로 통과·실제로 기능하지 않는 버튼·장식용 스테이지를 금지합니다.\n4. 교사가 선택한 학습 난이도는 퍼즐 복잡도·상황 판단·자료 해석·전략 깊이에까지 적용하세요.\n\n[장르별 화면 연출과 그래픽 구현 상세 지침]
+function basicInfo(){const g=genres.find(x=>x.id===selected);return {g,header:`[수업 정보]\n- 과목: ${value('subject')||'과목 미확정 (교사 확인 필요)'}\n- 단원: ${value('unit')||'단원명 미확정 (교사 확인 필요)'}\n- 대상: ${value('grade')||'학습 대상 확인 필요'}\n- 수업 핵심 내용(교사가 지정한 과목·단원 범위에서 추출·검토한 내용):\n${value('keyLearning')||'(핵심 내용 미입력: 학생 대상 설명이나 정답을 임의로 확정하지 말고 필요한 교과 개념을 교사에게 질문하세요)'}${documentSourceNote?"\n- 자료 확인 참고: "+documentSourceNote:""}\n\n[만들 앱의 핵심]\n- 앱 장르: ${g.name} — ${g.summary}\n- 게임 조작 방식: ${controlModeSummary()}\n- 교사가 반드시 원하는 기능: ${value('features')||'선택한 장르만의 실제 조작으로 학습 개념을 활용해 미션을 해결하는 상호작용'}\n- 화면 분위기: ${value('style')}\n- 그래픽 완성도: 모든 테마에서 반드시 고급형(교사 설정 불필요)\n- 학생 학습 난이도(교사 설정): ${learningDifficultyText()}\n- 더할 요소: ${selectedAddons().join(', ')||'없음'}\n\n[선택한 추가 설정]\n${settingBlock()}`};}
+function createPrompt(){const {g,header}=basicInfo();return `당신은 교과 학습을 설계하는 교육 전문가이자, 설치 없이 실행되는 HTML 교육용 앱을 만드는 숙련된 프런트엔드 개발자입니다.\n\n나는 코딩을 거의 모르는 교사입니다. 아래 정보만으로 학생이 실제로 조작할 수 있는 게임형 수업앱을 완성해 주세요. 아이디어 설명만 하지 말고, 바로 실행 가능한 코드를 작성하세요.\n\n${header}\n\n[${g.name} 장르에 맞는 게임 설계 지침]\n${g.mechanics}\n\n[게임 조작 방식 — 실제 작동 필수]\n${controlModePrompt()}\n\n[장르 고유의 실제 게임플레이 — 퀴즈화 금지]\n${gamePlayRules[g.id]}\n1. 교과 내용은 정답 해설에만 등장하면 안 됩니다. 학생이 그것을 알아야 게임의 도구·단서·전략·변인·상황을 조작해 목표를 달성하도록 만드세요.\n2. 퀴즈/OX 이외의 장르는 객관식·OX를 주된 진행 방식으로 사용하지 말고 선택한 장르의 고유한 상호작용을 중심으로 구현하세요.\n3. 모든 스테이지·미션은 실제로 서로 다른 사고나 조작을 요구해야 하며, 항상 같은 정답·무작위 클릭으로 통과·실제로 기능하지 않는 버튼·장식용 스테이지를 금지합니다.\n4. 교사가 선택한 학습 난이도는 퍼즐 복잡도·상황 판단·자료 해석·전략 깊이에까지 적용하세요.\n\n[장르별 화면 연출과 그래픽 구현 상세 지침]
 ${genreVisualDirection[g.id]}
 
 [선택한 디자인 테마의 구체적인 아트 디렉션]
@@ -359,14 +411,18 @@ function generatePrompt(){
  $('prompt').scrollTop=0;toast('🪄 앱 제작용 프롬프트가 완성됐어요!');
  if(innerWidth<1030)$('promptEmpty').closest('.panel').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function getForm(){const o={};['subject','unit','grade','keyLearning','features','setting','answer','notes','style','difficulty','learningDifficulty','learningDifficultyCustom'].forEach(id=>o[id]=value(id));o.selected=selected;o.addons=checkedAddonIDs();o.addonSelectionsByGenre={...addonSelectionsByGenre,[selected]:checkedAddonIDs()};return o;}
+function getForm(){const o={};['subject','unit','grade','keyLearning','features','setting','answer','notes','style','difficulty','learningDifficulty','learningDifficultyCustom'].forEach(id=>o[id]=value(id));o.selected=selected;o.controlMode=controlMode();o.controlModeByGenre={...controlModeByGenre};o.addons=checkedAddonIDs();o.addonSelectionsByGenre={...addonSelectionsByGenre,[selected]:checkedAddonIDs()};return o;}
 function setForm(o){if(!o.keyLearning&&o.content)o.keyLearning=o.content;['subject','unit','grade','keyLearning','features','setting','answer','notes','style','difficulty','learningDifficulty','learningDifficultyCustom'].forEach(id=>{if(o[id]!==undefined && o[id]!==null) $(id).value=o[id]});selected=genres.some(g=>g.id===o.selected)?o.selected:'quiz';
+ Object.keys(controlModeByGenre).forEach(k=>delete controlModeByGenre[k]);
+ if(o.controlModeByGenre&&typeof o.controlModeByGenre==='object'){
+  for(const g of genres){const m=o.controlModeByGenre[g.id];if(controlModeNames[m])controlModeByGenre[g.id]=m;}
+ }else if(controlModeNames[o.controlMode])controlModeByGenre[selected]=o.controlMode;
  Object.keys(addonSelectionsByGenre).forEach(k=>delete addonSelectionsByGenre[k]);
  if(o.addonSelectionsByGenre&&typeof o.addonSelectionsByGenre==='object'){
   for(const g of genres){const picked=o.addonSelectionsByGenre[g.id];if(Array.isArray(picked))addonSelectionsByGenre[g.id]=picked.filter(x=>addonsList.some(a=>a[0]===x));}
  }
  if(Array.isArray(o.addons))addonSelectionsByGenre[selected]=o.addons.filter(x=>addonsList.some(a=>a[0]===x));
- filter='전체';drawFilters();drawGenres();drawAddons();update();}
+ filter='전체';drawFilters();drawGenres();drawAddons();drawControlOptions();update();}
 async function copyText(){if(!promptIsGenerated)return toast('먼저 프롬프트를 제작해 주세요!');const t=$('prompt').textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t);}else{const temp=document.createElement('textarea');temp.value=t;temp.style.position='fixed';temp.style.left='-10000px';document.body.appendChild(temp);temp.select();const ok=document.execCommand('copy');temp.remove();if(!ok)throw new Error('copy failed');}toast('📋 프롬프트가 복사됐어요! AI에 붙여넣으세요.');}catch(e){toast('복사 권한이 없어요. 프롬프트 영역을 선택해 직접 복사하세요.');}}
 function downloadText(){if(!promptIsGenerated)return toast('먼저 프롬프트를 제작해 주세요!');const t=$('prompt').textContent;const b=new Blob(['\ufeff',t],{type:'text/plain;charset=utf-8'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='수업앱_제작프롬프트.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);toast('TXT 파일로 저장했어요');}
 
@@ -769,7 +825,7 @@ function setupFileAssistant(){const input=$('sourceFiles');input.addEventListene
 }
 
 
-function setup(){setupFileAssistant();drawFilters();drawGenres();drawAddons();setupRecommendations();$('recommendFeatures').addEventListener('click',recommendFeatures);['subject','unit','grade','keyLearning','features','setting','answer','notes','style','difficulty','learningDifficulty','learningDifficultyCustom'].forEach(id=>$(id).addEventListener('input',update));$('generatePrompt').addEventListener('click',generatePrompt);$('copy').addEventListener('click',copyText);$('download').addEventListener('click',downloadText);$('saveLocal').addEventListener('click',()=>{try{localStorage.setItem('hj_prompt_lab',JSON.stringify(getForm()));toast('이 브라우저에 설정을 저장했어요');}catch(e){toast('브라우저 저장이 허용되지 않습니다')}});$('loadLocal').addEventListener('click',()=>{try{const s=localStorage.getItem('hj_prompt_lab');if(!s)return toast('저장된 설정이 없어요');setForm(JSON.parse(s));toast('저장한 설정을 불러왔어요');}catch(e){toast('설정을 불러올 수 없어요')}});$('reset').addEventListener('click',()=>{if(!confirm('현재 작성한 내용을 처음으로 되돌릴까요?'))return;window.location.reload();});$('copy').disabled=true;$('download').disabled=true;update();}
+function setup(){setupFileAssistant();drawFilters();drawGenres();drawAddons();drawControlOptions();setupRecommendations();$('recommendFeatures').addEventListener('click',recommendFeatures);$('controlOptions').querySelectorAll('input[name="controlMode"]').forEach(input=>input.addEventListener('change',()=>{if(!input.checked)return;controlModeByGenre[selected]=input.value;drawControlOptions();update();}));['subject','unit','grade','keyLearning','features','setting','answer','notes','style','difficulty','learningDifficulty','learningDifficultyCustom'].forEach(id=>$(id).addEventListener('input',update));$('generatePrompt').addEventListener('click',generatePrompt);$('copy').addEventListener('click',copyText);$('download').addEventListener('click',downloadText);$('saveLocal').addEventListener('click',()=>{try{localStorage.setItem('hj_prompt_lab',JSON.stringify(getForm()));toast('이 브라우저에 설정을 저장했어요');}catch(e){toast('브라우저 저장이 허용되지 않습니다')}});$('loadLocal').addEventListener('click',()=>{try{const s=localStorage.getItem('hj_prompt_lab');if(!s)return toast('저장된 설정이 없어요');setForm(JSON.parse(s));toast('저장한 설정을 불러왔어요');}catch(e){toast('설정을 불러올 수 없어요')}});$('reset').addEventListener('click',()=>{if(!confirm('현재 작성한 내용을 처음으로 되돌릴까요?'))return;window.location.reload();});$('copy').disabled=true;$('download').disabled=true;update();}
 setup();
 })();</script>
 </body>
