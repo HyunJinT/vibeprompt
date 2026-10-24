@@ -220,11 +220,11 @@ hr{border:0;border-top:1px dashed #e5e3ee;margin:20px 0}.rowfields{display:grid;
   </section>
 </div>
 <aside class="rightCol"><section class="panel"><div class="resultHead"><div><h2>🪄 AI에게 전달할 마법 주문</h2><p>설정 완료 후 「프롬프트 제작하기」를 누르면 나타납니다</p></div><div style="font-size:25px">📜</div></div>
-    <div class="resultPad"><div class="state"><i class="dot"></i><span id="stateText">복사해서 AI에 붙여넣으면 됩니다</span><span id="count" style="margin-left:auto"></span></div>
+    <div class="resultPad"><div class="state"><i class="dot"></i><span id="stateText">AI에 붙여넣으면 HTML 파일 다운로드를 우선 요청합니다</span><span id="count" style="margin-left:auto"></span></div>
       <div id="promptEmpty" class="promptEmpty"><div class="emptyIcon">🪄</div><b>아직 프롬프트를 만들지 않았어요!</b><p>왼쪽에서 수업과 앱 종류를 설정한 뒤<br>「프롬프트 제작하기」를 눌러주세요.</p></div><pre id="prompt" class="promptBox" aria-live="polite" style="display:none"></pre>
-      <div class="action"><button class="primary" id="copy">📋 프롬프트 복사하기</button><button class="outline" id="download">⬇ TXT 저장</button></div>
+      <div class="action"><button class="primary" id="copy">📋 프롬프트 복사하기</button><button class="outline" id="download">⬇ 프롬프트 TXT 저장</button></div>
       <div class="linkrow"><span style="font-size:11px;color:#9489a8;font-weight:800">AI 열기 →</span><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT ↗</a><a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude ↗</a><a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini ↗</a></div>
-      <div class="tinyRule">📌 <b>이번 연수의 목표:</b> 이곳에서 만든 프롬프트를 <b>새 AI 대화창에 붙여넣고</b>, 생성된 전체 코드를 <b>메모장 → index.html 저장 → 브라우저로 실행</b>하는 것! 여러 AI 중 익숙한 도구를 선택하셔도 됩니다.</div>
+      <div class="tinyRule">📌 <b>이제는 HTML 파일 다운로드가 우선!</b> 프롬프트를 새 AI 대화창에 붙여넣으면 <b>완성된 index.html 파일을 생성·첨부</b>하도록 요청합니다. 파일을 받으면 다운로드 후 더블클릭해 실행하세요. <b>파일 생성 기능이 없는 AI</b>에서는 전체 코드를 받아 메모장에 붙여넣고 <b>index.html</b>로 저장하면 됩니다. <b>모든 AI에서 직접 다운로드가 보장되는 것은 아닙니다.</b></div>
       <p class="under">제조기는 AI에 직접 접속하거나 코드를 자동 생성하지 않습니다. 파일 글자 추출에는 외부 프로그램 파일을 인터넷에서 불러오지만, 원본 파일은 브라우저에서 처리하도록 구성했습니다. AI에 붙여넣거나 다시 첨부할 때부터 해당 AI 서비스에 자료가 전달됩니다.</p>
     </div>
   </section></aside>
@@ -373,7 +373,7 @@ const themeVisualDirection={
 };
 const scope={quick:'핵심 기능과 화면 수를 2~3개로 제한하되, 실제 게임 장면·시각적 완성도·주요 상호작용은 생략하지 마세요. 임시 텍스트 UI나 기본 버튼 목록으로 대체하지 마세요.',standard:'완성도와 안정성의 균형을 맞춰. 핵심 화면 3~5개, 학습 피드백, 자연스러운 전환과 기본 오류 처리를 포함해.',advanced:'다단계 콘텐츠와 풍성한 분기·상태 변화, 세련된 반응형 UI, 진행 상태 관리, 주요 예외 처리까지 자세히 구현해. 그래도 외부 의존성은 사용하지 마.'};
 function basicInfo(){const g=genres.find(x=>x.id===selected);return {g,header:`[수업 정보]\n- 과목: ${value('subject')||'과목 미확정 (교사 확인 필요)'}\n- 단원: ${value('unit')||'단원명 미확정 (교사 확인 필요)'}\n- 대상: ${value('grade')||'학습 대상 확인 필요'}\n- 수업 핵심 내용(교사가 지정한 과목·단원 범위에서 추출·검토한 내용):\n${value('keyLearning')||'(핵심 내용 미입력: 학생 대상 설명이나 정답을 임의로 확정하지 말고 필요한 교과 개념을 교사에게 질문하세요)'}${documentSourceNote?"\n- 자료 확인 참고: "+documentSourceNote:""}\n\n[만들 앱의 핵심]\n- 앱 장르: ${g.name} — ${g.summary}\n- 게임 조작 방식: ${controlModeSummary()}\n- 교사가 반드시 원하는 기능: ${value('features')||'선택한 장르만의 실제 조작으로 학습 개념을 활용해 미션을 해결하는 상호작용'}\n- 화면 분위기: ${value('style')}\n- 그래픽 완성도: 모든 테마에서 반드시 고급형(교사 설정 불필요)\n- 학생 학습 난이도(교사 설정): ${learningDifficultyText()}\n- 더할 요소: ${selectedAddons().join(', ')||'없음'}\n\n[선택한 추가 설정]\n${settingBlock()}`};}
-function createPrompt(){const {g,header}=basicInfo();return `당신은 교과 학습을 설계하는 교육 전문가이자, 설치 없이 실행되는 HTML 교육용 앱을 만드는 숙련된 프런트엔드 개발자입니다.\n\n나는 코딩을 거의 모르는 교사입니다. 아래 정보만으로 학생이 실제로 조작할 수 있는 게임형 수업앱을 완성해 주세요. 아이디어 설명만 하지 말고, 바로 실행 가능한 코드를 작성하세요.\n\n${header}\n\n[${g.name} 장르에 맞는 게임 설계 지침]\n${g.mechanics}\n\n[게임 조작 방식 — 실제 작동 필수]\n${controlModePrompt()}\n\n[장르 고유의 실제 게임플레이 — 퀴즈화 금지]\n${gamePlayRules[g.id]}\n1. 교과 내용은 정답 해설에만 등장하면 안 됩니다. 학생이 그것을 알아야 게임의 도구·단서·전략·변인·상황을 조작해 목표를 달성하도록 만드세요.\n2. 퀴즈/OX 이외의 장르는 객관식·OX를 주된 진행 방식으로 사용하지 말고 선택한 장르의 고유한 상호작용을 중심으로 구현하세요.\n3. 모든 스테이지·미션은 실제로 서로 다른 사고나 조작을 요구해야 하며, 항상 같은 정답·무작위 클릭으로 통과·실제로 기능하지 않는 버튼·장식용 스테이지를 금지합니다.\n4. 교사가 선택한 학습 난이도는 퍼즐 복잡도·상황 판단·자료 해석·전략 깊이에까지 적용하세요.\n\n[장르별 화면 연출과 그래픽 구현 상세 지침]
+function createPrompt(){const {g,header}=basicInfo();return `당신은 교과 학습을 설계하는 교육 전문가이자, 설치 없이 실행되는 HTML 교육용 앱을 만드는 숙련된 프런트엔드 개발자입니다.\n\n나는 코딩을 거의 모르는 교사입니다. 아래 정보만으로 학생이 실제로 조작할 수 있는 게임형 수업앱을 완성해 주세요. 아이디어 설명만 하지 말고, 바로 실행 가능한 결과물을 만들어 주세요. **가장 중요한 납품 결과물은 다운로드하여 실행하는 실제 index.html 파일입니다.** 파일 생성 또는 첨부 기능이 있는 AI라면 반드시 그 기능으로 HTML 파일을 제공하세요. 코드만 출력하는 것은 파일 생성 기능이 없을 때의 대안입니다.\n\n${header}\n\n[${g.name} 장르에 맞는 게임 설계 지침]\n${g.mechanics}\n\n[게임 조작 방식 — 실제 작동 필수]\n${controlModePrompt()}\n\n[장르 고유의 실제 게임플레이 — 퀴즈화 금지]\n${gamePlayRules[g.id]}\n1. 교과 내용은 정답 해설에만 등장하면 안 됩니다. 학생이 그것을 알아야 게임의 도구·단서·전략·변인·상황을 조작해 목표를 달성하도록 만드세요.\n2. 퀴즈/OX 이외의 장르는 객관식·OX를 주된 진행 방식으로 사용하지 말고 선택한 장르의 고유한 상호작용을 중심으로 구현하세요.\n3. 모든 스테이지·미션은 실제로 서로 다른 사고나 조작을 요구해야 하며, 항상 같은 정답·무작위 클릭으로 통과·실제로 기능하지 않는 버튼·장식용 스테이지를 금지합니다.\n4. 교사가 선택한 학습 난이도는 퍼즐 복잡도·상황 판단·자료 해석·전략 깊이에까지 적용하세요.\n\n[장르별 화면 연출과 그래픽 구현 상세 지침]
 ${genreVisualDirection[g.id]}
 
 [선택한 디자인 테마의 구체적인 아트 디렉션]
@@ -397,7 +397,13 @@ ${scope[value('difficulty')]}\n\n[학생 경험과 교육적 정확성]\n1. 학�
 3. 모든 퍼즐이 제시된 단서와 교과 내용만으로 해결 가능해야 하고, 실험 결과나 수식은 주어진 근거를 벗어나지 않아야 합니다.
 4. 버튼·드래그 대체 조작·그래픽·애니메이션·타이머·상태 변화·다시하기를 실제로 점검하세요. 시작/진행/종료 화면이 같은 세계관과 화풍인지, 게임 장면이 화면의 중심인지, 캐릭터가 단순 도형 수준에 그치지 않는지, 실제 게임 오브젝트 조작이 일어나는지도 확인하세요.
 
-[출력 형식]\n첫째, 완성된 HTML 전체 코드를 하나의 html 코드 블록으로 출력하세요.\n둘째, 코드 다음에는 '메모장 열기 → 코드 붙여넣기 → 다른 이름으로 저장(index.html, 파일 형식: 모든 파일, 인코딩: UTF-8) → 더블클릭 실행' 순서를 네 줄 이하로 설명하세요.\n셋째, 실행 테스트 3가지와 교사가 확인할 수업 내용(자료에서 불완전하게 추출되었을 수 있는 부분 포함)을 짧게 적으세요. 원본 PDF를 볼 수 없다는 사실을 코드 설명에 불필요하게 반복하지 마세요.\n\n이제 위 조건으로 첫 번째 실행 가능한 버전을 만들어 주세요.`;}
+[최종 결과물 전달 방식 — 반드시 지킬 최우선 지침]
+1. 완성된 HTML·CSS·JavaScript를 UTF-8 인코딩의 단일 'index.html' 파일로 실제 생성하세요. 설치·외부 파일 없이 브라우저에서 바로 실행되어야 합니다.
+2. 현재 AI 환경에서 실제 파일 생성·첨부·아티팩트 다운로드 기능을 사용할 수 있다면 반드시 사용하세요. 완성된 index.html 파일을 실제로 만들고, 답변 맨 앞에 다운로드 가능한 첨부파일 또는 AI 서비스의 공식 파일 다운로드 기능을 제공하세요. 파일 생성 기능이 있는데도 코드블록만 답하는 것은 불완전한 결과입니다.
+3. 다운로드 파일이 실제로 생성됐고 확장자가 .html인지 확인하세요. 파일을 만들지 못했다면 가짜 다운로드 링크, 작동하지 않는 data URL, 단순히 '다운로드 가능'하다는 설명으로 대신하지 마세요.
+4. 해당 AI 환경에서 파일 생성·첨부가 불가능한 경우에만 그 한계를 한 문장으로 밝히고 <!DOCTYPE html>부터 </html>까지 생략 없는 코드를 하나의 html 코드블록에 제공하세요. '메모장 → 코드 붙여넣기 → 다른 이름으로 저장 → index.html / 모든 파일 / UTF-8 → 더블클릭' 방법을 짧게 안내하세요.
+5. 파일을 제공한 경우에는 전체 코드를 채팅에 다시 길게 붙이지 말고 'HTML 다운로드 → 파일 더블클릭(Chrome 등)'만 알려주세요. 마지막에 실행 테스트 3가지와 교사가 확인할 수업 내용(자료 추출이 불완전할 수 있는 부분 포함)을 간략히 적으세요.
+6. 어떤 경우에도 파일 내용 생략·여러 파일로 분할·추가 설치가 필요한 프로젝트로 바꾸지 마세요. 제작 계획이나 추가 질문으로 끝내지 말고 첫 응답에서 실행 가능한 완성형 결과물을 제공하세요.\n\n이제 위 조건으로 첫 번째 실행 가능한 버전을 만들어 주세요.`;}
 function invalidatePrompt(){
  if(!promptIsGenerated)return;
  $('stateText').textContent='⚠️ 설정이 변경되었습니다. 현재 결과는 이전 설정입니다. 「프롬프트 제작하기」를 다시 누르면 새 내용으로 교체됩니다.';
@@ -407,7 +413,7 @@ function generatePrompt(){
  const text=createPrompt();
  $('prompt').textContent=text;$('prompt').style.display='block';$('promptEmpty').style.display='none';
  $('copy').disabled=false;$('download').disabled=false;$('count').textContent=text.length.toLocaleString()+'자';
- $('stateText').textContent='완성! 복사한 후 새 AI 대화창에 붙여넣으세요.';promptIsGenerated=true;
+ $('stateText').textContent='완성! AI에 붙여넣으면 index.html 파일 첨부를 우선 요청합니다.';promptIsGenerated=true;
  $('prompt').scrollTop=0;toast('🪄 앱 제작용 프롬프트가 완성됐어요!');
  if(innerWidth<1030)$('promptEmpty').closest('.panel').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -423,7 +429,7 @@ function setForm(o){if(!o.keyLearning&&o.content)o.keyLearning=o.content;['subje
  }
  if(Array.isArray(o.addons))addonSelectionsByGenre[selected]=o.addons.filter(x=>addonsList.some(a=>a[0]===x));
  filter='전체';drawFilters();drawGenres();drawAddons();drawControlOptions();update();}
-async function copyText(){if(!promptIsGenerated)return toast('먼저 프롬프트를 제작해 주세요!');const t=$('prompt').textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t);}else{const temp=document.createElement('textarea');temp.value=t;temp.style.position='fixed';temp.style.left='-10000px';document.body.appendChild(temp);temp.select();const ok=document.execCommand('copy');temp.remove();if(!ok)throw new Error('copy failed');}toast('📋 프롬프트가 복사됐어요! AI에 붙여넣으세요.');}catch(e){toast('복사 권한이 없어요. 프롬프트 영역을 선택해 직접 복사하세요.');}}
+async function copyText(){if(!promptIsGenerated)return toast('먼저 프롬프트를 제작해 주세요!');const t=$('prompt').textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t);}else{const temp=document.createElement('textarea');temp.value=t;temp.style.position='fixed';temp.style.left='-10000px';document.body.appendChild(temp);temp.select();const ok=document.execCommand('copy');temp.remove();if(!ok)throw new Error('copy failed');}toast('📋 복사 완료! AI에 붙여넣으면 HTML 파일을 우선 요청해요.');}catch(e){toast('복사 권한이 없어요. 프롬프트 영역을 선택해 직접 복사하세요.');}}
 function downloadText(){if(!promptIsGenerated)return toast('먼저 프롬프트를 제작해 주세요!');const t=$('prompt').textContent;const b=new Blob(['\ufeff',t],{type:'text/plain;charset=utf-8'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='수업앱_제작프롬프트.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);toast('TXT 파일로 저장했어요');}
 
 /* 교과서 읽기 도우미. API 키가 아닌 브라우저 내부 문자 추출로 동작하며,
